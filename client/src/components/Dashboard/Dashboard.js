@@ -3,9 +3,10 @@ import "./Dashboard.scss";
 import ClientList from "../ClientList/ClientList";
 import Map from "../Map/Map";
 import Charts from "../Charts/Charts";
+import Camera from "../Camera/Camera";
 
 function Dashboard(props) {
-    console.log(props)
+  console.log(props);
   return (
     <div className="container">
       <div className="row">
@@ -29,24 +30,25 @@ function Dashboard(props) {
       <div className="row">
         <div className="col-4">
           <div className="widget">
-            <h3>Cam 1</h3>
+            <Camera camID="1"></Camera>
           </div>
         </div>
         <div className="col-4">
           <div className="widget">
-            <h3>Cam 2</h3>
+            <Camera camID="2"></Camera>
           </div>
         </div>
         <div className="col-4">
           <div className="widget">
-            <h3>Cam 3</h3>
+            <Camera camID="3"></Camera>
           </div>
         </div>
       </div>
+      {/* below is just for an example of passing props, remove whenever */}
       <div>
-          <p>{props.data}</p>
-          <p>{props.data2.string1}</p>
-          <p>{props.data2.string2}</p>
+        <p>{props.data}</p>
+        <p>{props.data2.string1}</p>
+        <p>{props.data2.string2}</p>
       </div>
     </div>
   );
