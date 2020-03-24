@@ -1,5 +1,8 @@
 import React from "react";
 import "./Dashboard.scss";
+import ClientList from "../ClientList/ClientList";
+import Map from "../Map/Map";
+import Charts from "../Charts/Charts";
 
 function Dashboard(props) {
     console.log(props)
@@ -8,17 +11,17 @@ function Dashboard(props) {
       <div className="row">
         <div className="col-6">
           <div className="widget">
-            <h3>Map</h3>
+            <Map></Map>
           </div>
         </div>
         <div className="col-3">
           <div className="widget">
-            <h3>Widget 1</h3>
+            <Charts></Charts>
           </div>
         </div>
         <div className="col-3">
           <div className="widget">
-            <h3>Widget 2</h3>
+            <ClientList></ClientList>
           </div>
         </div>
       </div>

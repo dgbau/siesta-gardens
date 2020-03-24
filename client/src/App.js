@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="container">
       <MainNav></MainNav>
-      <Dashboard data="this is any sort of data to the component" data2={testData}></Dashboard>
+      <Dashboard data="this is any sort of data, input to the <Dashboard> component" data2={testData}></Dashboard>
     </div>
   );
 }
