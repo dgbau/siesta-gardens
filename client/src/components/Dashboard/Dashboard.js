@@ -12,7 +12,7 @@ function Dashboard(props) {
       <div className="row">
         <div className="col-6">
           <div className="widget">
-            <Map></Map>
+            <Map cars="carList"></Map>
           </div>
         </div>
         <div className="col-3">
