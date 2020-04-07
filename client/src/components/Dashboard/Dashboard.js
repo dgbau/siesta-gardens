@@ -22,7 +22,7 @@ function Dashboard(props) {
         </div>
         <div className="col-3">
           <div className="widget">
-            <ClientList></ClientList>
+            <ClientList data={props.data.clientData.clients}></ClientList>
           </div>
         </div>
       </div>
@@ -43,13 +43,7 @@ function Dashboard(props) {
             <Camera camID="3"></Camera>
           </div>
         </div>
-      </div>
-      {/* below is just for an example of passing props, remove whenever */}
-      <div>
-        <p>{props.data}</p>
-        <p>{props.data2.string1}</p>
-        <p>{props.data2.string2}</p>
-      </div>
+      </div>  
     </div>
   );
 }
