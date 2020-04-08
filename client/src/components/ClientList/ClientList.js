@@ -3,7 +3,7 @@ import "./ClientList.scss";
 
 function ClientList(props) {
   return (
-    <div>
+    <div className="clientlist">
         <h3>Client List</h3>
         <ul>
           {props.data.map(({firstName, lastName}) => <li>{firstName} {lastName}</li>)}
