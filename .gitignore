@@ -2,6 +2,7 @@
 
 # IDE
 .vscode
+.idea
 
 # CLIENT GITIGNORES
 # dependencies
@@ -32,6 +33,7 @@ yarn-error.log*
 server/__pycache__/
 server/*.py[cod]
 server/*$py.class
+__pycache__
 
 # C extensions
 server/*.so

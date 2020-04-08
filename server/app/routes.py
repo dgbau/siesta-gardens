@@ -1,7 +1,5 @@
-from flask import Response
-from app import app, helpers
-import json
-
+from flask import Response, jsonify
+from server.app import app, helpers
 
 @app.route('/')
 @app.route('/index')
@@ -10,12 +8,17 @@ def index():
 
 @app.route('/users')
 def get_users():
-    return Response(json.dumps(helpers.create_fake_users(10)),  mimetype='application/json')
+    return jsonify(helpers.create_fake_users(10))
 
-@socketio.on('message')
-def handle_message(message):
-    print('received message: ' + message)
+@app.route('/data')
+def get_data():
+    return "ALL THE DATA"
 
+@app.route('/locs')
+def get_locs():
+    te.what()
+    print('WHTHTHH')
+    return "ALL THE LOCATIONS"
 
 
 
