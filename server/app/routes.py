@@ -1,5 +1,10 @@
 from flask import Response, jsonify
 from server.app import app, helpers
+from server.model.Client import Client
+
+c = Client("david", "bau", 1)
+
+print(c)
 
 @app.route('/')
 @app.route('/index')
@@ -14,10 +19,12 @@ def get_users():
 def get_data():
     return "ALL THE DATA"
 
+@app.route('/client')
+def get_client():
+    return str(c)
+
 @app.route('/locs')
 def get_locs():
-    te.what()
-    print('WHTHTHH')
     return "ALL THE LOCATIONS"
 
 
