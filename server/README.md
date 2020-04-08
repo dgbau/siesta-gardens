@@ -26,3 +26,6 @@
 or go here if you're not able to get it to run right 
 https://flask.palletsprojects.com/en/1.1.x/installation/
 
+for conda support with Pycharm
+https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html
+
