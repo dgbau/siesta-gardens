@@ -12,6 +12,10 @@ def index():
 def get_users():
     return Response(json.dumps(helpers.create_fake_users(10)),  mimetype='application/json')
 
+@socketio.on('message')
+def handle_message(message):
+    print('received message: ' + message)
+
 
 
 

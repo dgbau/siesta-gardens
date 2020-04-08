@@ -6,18 +6,17 @@ import Charts from "../Charts/Charts";
 import Camera from "../Camera/Camera";
 
 function Dashboard(props) {
-  console.log(props);
   return (
     <div className="container">
       <div className="row">
         <div className="col-6">
           <div className="widget">
-            <Map cars="carList"></Map>
+            <Map data={props.data.locationData}></Map>
           </div>
         </div>
         <div className="col-3">
           <div className="widget">
-            <Charts></Charts>
+            <Charts data={props.data}></Charts>
           </div>
         </div>
         <div className="col-3">

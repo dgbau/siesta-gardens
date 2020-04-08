@@ -1,7 +1,11 @@
 
 
 .clientlist {
+    
     ul {
+        height: 340px;
+    overflow: auto;
+        min-height: 100px;
         padding: 10px;
         // margin: 10px;
     }
