@@ -8,12 +8,10 @@ import mockData from "./fakeData"
 
 
 function App() {
-  let testData = {string1: "like json -> ", string2: 123}
-  console.log(mockData)
   return (
-    <div className="container">
+    <div className="container-fluid">
       <MainNav></MainNav>
-      <Dashboard data={mockData} data2={testData}></Dashboard>
+      <Dashboard data={mockData}></Dashboard>
     </div>
   );
 }
