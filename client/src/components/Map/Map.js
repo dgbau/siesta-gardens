@@ -8,7 +8,8 @@ export default class MapC extends Component {
     zoom: 14,
   };
   render() {
-    return this.props.cars ? (
+    console.log(this.props.data)
+    return this.props.data ? (
       <Map
         center={[this.state.lat, this.state.lng]}
         zoom={this.state.zoom}
