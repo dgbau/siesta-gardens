@@ -61,7 +61,7 @@ class Camera extends Component {
 
     var animate = function () {
       requestAnimationFrame( animate );
-      console.log(camera.position);
+      // console.log(camera.position);
       if(camera.position.x<-100&&heading==0){
         heading=1;
       }

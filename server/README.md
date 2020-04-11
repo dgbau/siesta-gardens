@@ -20,7 +20,7 @@
 ```conda deactivate```
 
 ###### to run the server (from server directory root)
-```FLASK_APP=server/server.py FLASK_ENV=development flask run```
+```FLASK_APP=server.py FLASK_ENV=development flask run```
 
 
 or go here if you're not able to get it to run right 
