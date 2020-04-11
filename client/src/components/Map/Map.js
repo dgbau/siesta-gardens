@@ -23,7 +23,7 @@ export default class MapC extends Component {
           isLoaded: true,
           locs: result
         });
-        // console.log(result);
+        console.log(result);
         // setLocs(result)
       }), 1000)
   }
