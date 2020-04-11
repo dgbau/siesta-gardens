@@ -4,11 +4,11 @@ const mockData = {
         "carLoc": [23, 33]
     },
     "locationData": {
-        "dinoLoc": [12, 23],
+        "dinoLoc": {x:0,y:0,heading:0},
         "carsLoc": [
-            {"lat": 14, "long": 18, "id": 0},
-            {"lat": 14, "long": 18, "id": 1},
-            {"lat": 14, "long": 18, "id": 2}
+            {x:100,y:100,heading:0},
+            {x:-100,y:100,heading:1},
+            {x:-100,y:-100,heading:2}
         ]
     },
     "perimeterData": {
