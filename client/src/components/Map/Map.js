@@ -16,9 +16,13 @@ export default class MapC extends Component {
         style={{ width: "100%", height: "400px" }}
       >
         <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &amp; USGS'
+          url="http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png"
+        />
+        {/* <TileLayer
           attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        /> */}
       </Map>
     ) : (
       "Data is loading..."

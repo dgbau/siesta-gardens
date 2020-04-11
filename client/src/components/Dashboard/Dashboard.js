@@ -7,19 +7,19 @@ import Camera from "../Camera/Camera";
 
 function Dashboard(props) {
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row">
-        <div className="col-6">
+        <div className="col-4">
           <div className="widget">
             <Map data={props.data.locationData}></Map>
           </div>
         </div>
-        <div className="col-3">
+        <div className="col-4">
           <div className="widget">
             <Charts data={props.data}></Charts>
           </div>
         </div>
-        <div className="col-3">
+        <div className="col-4">
           <div className="widget">
             <ClientList data={props.data.clientData.clients}></ClientList>
           </div>
