@@ -153,7 +153,7 @@ objLoader.load('./assets/trex.obj', function(object) {
       trex.position.x=data.locationData.dinoLoc.x;
       trex.position.z=data.locationData.dinoLoc.y;
       trex.rotation.y=data.locationData.dinoLoc.heading;
-      
+
     },10);
   }
 
