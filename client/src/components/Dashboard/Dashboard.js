@@ -4,6 +4,7 @@ import ClientList from "../ClientList/ClientList";
 import Map from "../Map/Map";
 import Charts from "../Charts/Charts";
 import Camera from "../Camera/Camera";
+import DroneCamera from "../DroneCamera/DroneCamera";
 import ReactDOM from "react-dom";
 import * as THREE from "three";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
@@ -65,7 +66,7 @@ function ( texture ) {
   var groundMaterial=new THREE.MeshBasicMaterial({
     map: texture
   });
-  var plane = new THREE.Mesh(new THREE.BoxGeometry(300,1,300),groundMaterial);
+  var plane = new THREE.Mesh(new THREE.BoxGeometry(1000,1,1000),groundMaterial);
   scene.add(plane);
 
 
@@ -121,6 +122,9 @@ console.error( 'An error happened.' );
 }
 );
 
+var data=this.props.data;
+
+
 var trex;
 
 var mtlLoader = new MTLLoader();
@@ -130,8 +134,12 @@ var objLoader = new OBJLoader();
 
 objLoader.setMaterials(materials);
 objLoader.load('./assets/trex.obj', function(object) {
-  object.scale.set(2,2,2);
   trex=object;
+  object.scale.set(2,2,2);
+  object.traverse( function ( child ) {
+    if ( child instanceof THREE.Mesh )
+        child.material.color.setHex(0xff0000);
+    });
   object.position.x=10;
   object.position.y=20;
   object.position.z=10;
@@ -141,18 +149,166 @@ objLoader.load('./assets/trex.obj', function(object) {
 });
 });
 
-  var data=this.props.data;
+var cars=[];
+
+//Car 1
+var mtlLoader = new MTLLoader();
+mtlLoader.load('./assets/trex.mtl', function(materials) {
+materials.preload();
+var objLoader = new OBJLoader();
+
+objLoader.setMaterials(materials);
+objLoader.load('./assets/vehicle.obj', function(object) {
+  object.scale.set(5,5,5);
+  cars.push(object);
+  object.position.x=data.locationData.carsLoc[0].x;
+  object.position.y=5;
+  object.position.z=data.locationData.carsLoc[0].y;
+  scene.add(object);
+}, undefined,function(err){
+  console.log(err);
+});
+});
+
+//Car 2
+var mtlLoader = new MTLLoader();
+mtlLoader.load('./assets/trex.mtl', function(materials) {
+materials.preload();
+var objLoader = new OBJLoader();
+
+objLoader.setMaterials(materials);
+objLoader.load('./assets/vehicle.obj', function(object) {
+  object.scale.set(5,5,5);
+  cars.push(object);
+  object.position.x=data.locationData.carsLoc[1].x;
+  object.position.y=5;
+  object.position.z=data.locationData.carsLoc[1].y;
+  scene.add(object);
+}, undefined,function(err){
+  console.log(err);
+});
+});
+
+//Car 3
+var mtlLoader = new MTLLoader();
+mtlLoader.load('./assets/trex.mtl', function(materials) {
+materials.preload();
+var objLoader = new OBJLoader();
+
+objLoader.setMaterials(materials);
+objLoader.load('./assets/vehicle.obj', function(object) {
+  object.scale.set(5,5,5);
+  cars.push(object);
+  object.position.x=data.locationData.carsLoc[2].x;
+  object.position.y=5;
+  object.position.z=data.locationData.carsLoc[2].y;
+  scene.add(object);
+}, undefined,function(err){
+  console.log(err);
+});
+});
+
+
+
+var people=[];
+var i=0;
+//Person 1
+var mtlLoader = new MTLLoader();
+mtlLoader.load('./assets/trex.mtl', function(materials) {
+materials.preload();
+var objLoader = new OBJLoader();
+
+objLoader.setMaterials(materials);
+objLoader.load('./assets/person.obj', function(object) {
+  object.scale.set(.1,.1,.1);
+  people.push(object);
+  object.position.x=data.locationData.peopleLoc[0].x;
+  object.position.y=10;
+  object.position.z=data.locationData.peopleLoc[0].y;
+  scene.add(object);
+}, undefined,function(err){
+  console.log(err);
+});
+});
+
+//Person 2
+var mtlLoader = new MTLLoader();
+mtlLoader.load('./assets/trex.mtl', function(materials) {
+materials.preload();
+var objLoader = new OBJLoader();
+
+objLoader.setMaterials(materials);
+objLoader.load('./assets/person.obj', function(object) {
+  object.scale.set(.1,.1,.1);
+  people.push(object);
+  object.position.x=data.locationData.peopleLoc[1].x;
+  object.position.y=10;
+  object.position.z=data.locationData.peopleLoc[1].y;
+  scene.add(object);
+}, undefined,function(err){
+  console.log(err);
+});
+});
+
+//Person 3
+var mtlLoader = new MTLLoader();
+mtlLoader.load('./assets/trex.mtl', function(materials) {
+materials.preload();
+var objLoader = new OBJLoader();
+
+objLoader.setMaterials(materials);
+objLoader.load('./assets/person.obj', function(object) {
+  object.scale.set(.1,.1,.1);
+  people.push(object);
+  object.position.x=data.locationData.peopleLoc[2].x;
+  object.position.y=10;
+  object.position.z=data.locationData.peopleLoc[2].y;
+  scene.add(object);
+}, undefined,function(err){
+  console.log(err);
+});
+});
+
+//Person 4
+var mtlLoader = new MTLLoader();
+mtlLoader.load('./assets/trex.mtl', function(materials) {
+materials.preload();
+var objLoader = new OBJLoader();
+
+objLoader.setMaterials(materials);
+objLoader.load('./assets/person.obj', function(object) {
+  object.scale.set(.1,.1,.1);
+  people.push(object);
+  object.position.x=data.locationData.peopleLoc[3].x;
+  object.position.y=10;
+  object.position.z=data.locationData.peopleLoc[3].y;
+  scene.add(object);
+}, undefined,function(err){
+  console.log(err);
+});
+});
+
+
+
+
+
   //Update Dinosaurs Location
 
-  setTimeout(updateDino,2000);
+  setTimeout(updateObjs,2000);
 
-  function updateDino(){
+  function updateObjs(){
 
     setInterval(function(){
+      //Dinosaur Movement
       trex.position.x=data.locationData.dinoLoc.x;
       trex.position.z=data.locationData.dinoLoc.y;
       trex.rotation.y=data.locationData.dinoLoc.heading;
-
+      //Car Movement
+      for(var i=0;i<data.locationData.carsLoc.length;i++){
+        cars[i].position.x=data.locationData.carsLoc[i].x;
+        cars[i].position.z=data.locationData.carsLoc[i].y;
+        cars[i].rotation.y=data.locationData.carsLoc[i].heading*Math.PI/2-Math.PI/2;
+      }
     },10);
   }
 
@@ -192,6 +348,9 @@ objLoader.load('./assets/trex.obj', function(object) {
     <Camera camID="2" scene={this.sceney} location={this.props.data.locationData}></Camera>
     </div>
     </div>
+    </div>
+    <div id="dronecamera">
+      <DroneCamera camID="3" cam={this.props.data.camData} scene={this.sceney} location={this.props.data.locationData}></DroneCamera>
     </div>
     </div>
   );

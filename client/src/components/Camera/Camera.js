@@ -31,7 +31,7 @@ class Camera extends Component {
       //console.log(camera.position);
       var camLoc=data.location.carsLoc[camID];
       camera.position.x=camLoc.x;
-      camera.position.y=10;
+      camera.position.y=17;
       camera.position.z=camLoc.y;
       camera.lookAt(new THREE.Vector3(10,10,1));
 
@@ -48,49 +48,5 @@ render() {
 
 }
 
-/*
-var heading=0;
 
-var animate = function () {
-  requestAnimationFrame( animate );
-  //console.log(camera.position);
-  if(camera.position.x<-100&&heading==0){
-    heading=1;
-  }
-  if(camera.position.z<-100&&heading==1){
-    heading=2;
-  }
-  if(camera.position.x>100&&heading==2){
-    heading=3;
-  }
-  if(camera.position.z>100&&heading==3){
-    heading=0;
-  }
-
-
-  switch(heading){
-    case 0:
-    camera.position.x-=0.2
-    break;
-    case 1:
-    camera.position.z-=0.2
-    break;
-    case 2:
-    camera.position.x+=0.2
-    break;
-    case 3:
-    camera.position.z+=0.2
-    break;
-  }
-
-
-
-  //camera.lookAt(new THREE.Vector3(80,80,1));
-  camera.lookAt(new THREE.Vector3(10,10,1));
-  //camera.rotation.z=-.5;
-  //camera.rotation.x=1;
-  renderer.render( scene, camera );
-};
-animate();
-*/
 export default Camera;

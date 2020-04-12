@@ -1,0 +1,95 @@
+
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import * as THREE from "three";
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
+
+
+class Camera extends Component {
+
+  componentDidMount() {
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth/2, window.innerHeight/2);
+
+    var camLoc=this.props.cam;
+    camera.position.x=camLoc.x;
+    camera.position.y=camLoc.y;
+    camera.position.z=camLoc.z;
+    camera.lookAt(new THREE.Vector3(0,0,0));
+    console.log(camera.rotation);
+    // document.body.appendChild( renderer.domElement );
+    // use ref as a mount point of the Three.js scene instead of the document.body
+    this.mount.appendChild( renderer.domElement );
+    var heading=0;
+    var data=this.props;
+    var sceney=this.props.scene;
+    var animate = function () {
+      requestAnimationFrame( animate );
+      //console.log(camera.position);
+      camera.position.x=camLoc.x;
+      camera.position.y=camLoc.y;
+      camera.position.z=camLoc.z;
+      camera.rotation.x=camLoc.rotX;
+      camera.rotation.y=camLoc.rotY;
+      camera.rotation.z=camLoc.rotZ;
+      //camera.lookAt(new THREE.Vector3(0,0,0));
+
+      renderer.render( sceney, camera );
+    };
+    animate();
+
+    document.body.addEventListener("keydown", moveCamera);
+
+    function moveCamera(e){
+      console.log(e.keyCode);
+      if(e.keyCode==87){//Up
+        camLoc.z-=1;
+      }
+      if(e.keyCode==83){//Down
+        camLoc.z+=1;
+      }
+      if(e.keyCode==68){//Right
+        camLoc.x+=1;
+      }
+      if(e.keyCode==65){//Left
+        camLoc.x-=1;
+      }
+
+      if(e.keyCode==73){//Pan up
+        camLoc.rotX-=.01;
+      }
+      if(e.keyCode==75){//Pan down
+        camLoc.rotX+=.01;
+      }
+
+      if(e.keyCode==76){//Pan left
+        camLoc.rotZ-=.01;
+      }
+      if(e.keyCode==74){//Pan right
+        camLoc.rotZ+=.01;
+      }
+
+      if(e.keyCode==81){//Go up
+        camLoc.y+=1;
+      }
+      if(e.keyCode==69){//Go down
+        camLoc.y-=1;
+      }
+
+
+
+    }
+  }
+    render() {
+
+      return (
+        <div ref={ref => (this.mount = ref)} />
+      )
+    }
+
+  }
+
+
+export default Camera;

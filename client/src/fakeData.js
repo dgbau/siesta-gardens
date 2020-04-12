@@ -1,7 +1,11 @@
 const mockData = {
     "camData": {
-        "dinoLoc": [12, 23],
-        "carLoc": [23, 33]
+        x:0,
+        y:200,
+        z:0,
+        rotX:-1.57,
+        rotY:0,
+        rotZ:0
     },
     "locationData": {
         "dinoLoc": {x:0,y:0,heading:0},
@@ -9,6 +13,12 @@ const mockData = {
             {x:100,y:100,heading:0},
             {x:-100,y:100,heading:1},
             {x:-100,y:-100,heading:2}
+        ],
+        "peopleLoc": [
+            {x:80,y:80,heading:0},
+            {x:-80,y:80,heading:1},
+            {x:-80,y:-80,heading:2},
+            {x:80,y:-80,heading:3},
         ]
     },
     "perimeterData": {
