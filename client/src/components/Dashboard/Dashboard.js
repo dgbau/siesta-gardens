@@ -294,7 +294,7 @@ objLoader.load('./assets/person.obj', function(object) {
 
   //Update Dinosaurs Location
 
-  setTimeout(updateObjs,2000);
+  setTimeout(updateObjs,5000);
 
   function updateObjs(){
 
@@ -331,7 +331,9 @@ objLoader.load('./assets/person.obj', function(object) {
     </div>
     </div>
     </div>
-
+    <div id="dronecamera" style={{marginLeft:"15vw"}}>
+      <DroneCamera camID="3" cam={this.props.data.camData} scene={this.sceney} location={this.props.data.locationData}></DroneCamera>
+    </div>
     <div className="row">
     <div className="col-4">
     <div className="widget">
@@ -349,9 +351,7 @@ objLoader.load('./assets/person.obj', function(object) {
     </div>
     </div>
     </div>
-    <div id="dronecamera">
-      <DroneCamera camID="3" cam={this.props.data.camData} scene={this.sceney} location={this.props.data.locationData}></DroneCamera>
-    </div>
+
     </div>
   );
 }

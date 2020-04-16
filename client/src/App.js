@@ -16,6 +16,13 @@ class App extends Component{
 
       if(distance(0,0,mockData.locationData.dinoLoc.x,mockData.locationData.dinoLoc.y)>40){
         mockData.locationData.dinoLoc.heading+=.001;
+        if(distance(0,0,
+          mockData.locationData.dinoLoc.x+.1*Math.sin(mockData.locationData.dinoLoc.heading,
+            mockData.locationData.dinoLoc.y)+.1*Math.cos(mockData.locationData.dinoLoc.heading))
+            <40){
+          mockData.locationData.dinoLoc.x+=1*Math.sin(mockData.locationData.dinoLoc.heading);
+          mockData.locationData.dinoLoc.y+=1*Math.cos(mockData.locationData.dinoLoc.heading);
+        }
       }else{
         mockData.locationData.dinoLoc.x+=.1*Math.sin(mockData.locationData.dinoLoc.heading);
         mockData.locationData.dinoLoc.y+=.1*Math.cos(mockData.locationData.dinoLoc.heading);
