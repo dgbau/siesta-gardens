@@ -12,3 +12,4 @@ def cars_loc():
     }
 
 def get_state():
+    return 'the whole state, calling stuff in the main or the simulatior'
