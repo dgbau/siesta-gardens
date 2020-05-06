@@ -1,6 +1,8 @@
 import React from "react";
 import "./ClientList.scss";
 
+// TODO add tabs for three client groups
+
 function ClientList(props) {
   return (
     <div className="clientlist">
