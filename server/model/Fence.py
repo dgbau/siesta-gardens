@@ -15,7 +15,8 @@ class Fence:
 
     ''' Update the state of the fence '''
     def update_fence(self, new_state):
-        self._fence = new_state
+        self._fence = [0 if x - y < 0 else x - y for x, y in zip(self._fence, new_state)]
+
 
 
 
