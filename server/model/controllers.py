@@ -11,5 +11,8 @@ def cars_loc():
         "car3": [random.uniform(12, 13), random.uniform(12, 13)]
     }
 
+
 def get_state():
     return 'the whole state, calling stuff in the main or the simulatior'
+
+
