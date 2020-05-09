@@ -32,26 +32,20 @@ export default class MapC extends Component {
   }
 
   render() {
-    console.log(this.props.data);
     return this.state.isLoaded ? (
-      <svg>
-        <rect x="0" y="0" height="600" width="600" style="fill: #000000" />
+      <svg height="375" width="375">
+        <rect x="0" y="0" height="375" width="375" />
 
         <image
           x="0"
           y="0"
-          width="600"
-          height="600"
-          href="images/SGMap.png"
+          width="375"
+          height="375"
+          href="images/SGMap_center1.jpg"
         />
 
-        <line
-          x1="25"
-          y1="80"
-          x2="350"
-          y2="80"
-          style="stroke: #ffffff; stroke-width: 3;"
-        />
+        <circle cx={((this.state.locs.dino[0] - 1500) / 8)} cy={((this.state.locs.dino[1] - 1500) / 8) } r={5} fill={'red'}></circle>
+        <circle cx={((this.state.locs.car[0] - 1500) / 8)} cy={((this.state.locs.car[1] - 1500) / 8) } r={5} fill={'blue'}></circle>
       </svg>
     ) : (
       "Data is loading..."

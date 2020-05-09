@@ -11,7 +11,7 @@ class Camera extends Component {
   componentDidMount() {
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 50000 );
     var renderer = new THREE.WebGLRenderer();
-    renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
+    renderer.setSize( window.innerWidth/3, window.innerHeight/3 );
 
     var camLoc=this.props.location.carLoc;
 
