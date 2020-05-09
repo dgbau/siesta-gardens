@@ -29,6 +29,8 @@ def get_data():
 @app.route('/park-state')
 @cross_origin()
 def get_state():
+    dinoloc = dino_loc()
+    carloc = car_loc()
     return jsonify({
     "camData": {
         "x":0,
@@ -39,8 +41,16 @@ def get_state():
         "rotZ":0
     },
     "locationData": {
-        "dinoLoc": dino_loc(),
-        "carLoc": car_loc(),
+        "dinoLoc": {
+            "x": dinoloc[0],
+            "y": dinoloc[1],
+            "heading": 0
+        },
+        "carLoc": {
+            "x": carloc[0],
+            "y": carloc[1],
+            "heading": 0
+        },
     },
     "perimeterData": {
         "sections": [0,0,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],

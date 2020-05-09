@@ -16,6 +16,10 @@ var OFFSET=3000;
 
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {}
 
   render() {
@@ -259,6 +263,8 @@ scene.add(fence24);
       }, 10);
     }
 
+
+    console.log("dashboard props", this.props.data)
     return (
       <div className="container">
         <div className="row">

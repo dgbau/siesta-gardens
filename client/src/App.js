@@ -9,20 +9,30 @@ import mockData from "./fakeData"
 
 
 class App extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoaded: false,
+      data: null
+    };
+  }
+
   componentDidMount(){
     setInterval(
       () =>
-        fetch("http://127.0.0.1:5000/locs")
+        fetch("http://127.0.0.1:5000/park-state")
           .then((res) => res.json())
           .then((result) => {
-            mockData.locationData.dinoLoc.x=result.dino[0];
-            mockData.locationData.dinoLoc.y=result.dino[1];
+            this.setState({
+              isLoaded: true,
+              data: result,
+            });
+            // mockData.locationData.dinoLoc.x=result.dino[0];
+            // mockData.locationData.dinoLoc.y=result.dino[1];
 
-            console.log(result.car[0]);
-            mockData.locationData.carLoc.x=result.car[0];
-            mockData.locationData.carLoc.y=result.car[1];
-
-
+            // console.log(result.car[0]);
+            // mockData.locationData.carLoc.x=result.car[0];
+            // mockData.locationData.carLoc.y=result.car[1];
           }),
       1000
     );
@@ -93,12 +103,12 @@ class App extends Component{
 
 
   render(){
-    this.state=mockData;
     return (
+      this.state.data ? 
       <div className="container-fluid">
       <MainNav></MainNav>
-      <Dashboard data={this.state}></Dashboard>
-      </div>
+      <Dashboard data={this.state.data}></Dashboard>
+      </div> : <div>Loading...</div>
     );
   }
 }
