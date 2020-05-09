@@ -10,10 +10,11 @@ import mockData from "./fakeData"
 
 class App extends Component{
   componentDidMount(){
+    /*
     setInterval(function(){
       //Simulate Dinosaur Moving Around
       mockData.locationData.dinoLoc.heading+=.001*(2*Math.random()-1);
-
+      console.log(mockData);
       if(distance(0,0,mockData.locationData.dinoLoc.x,mockData.locationData.dinoLoc.y)>40){
         mockData.locationData.dinoLoc.heading+=.001;
         if(distance(0,0,
@@ -29,38 +30,39 @@ class App extends Component{
       }
 
       //Simulate Cars Moving around
-      for(var i=0;i<mockData.locationData.carsLoc.length;i++){
-        if(mockData.locationData.carsLoc[i].x<-100&&mockData.locationData.carsLoc[i].heading==0){
-          mockData.locationData.carsLoc[i].heading=1;
+      for(var i=0;i<mockData.locationData.carLoc.length;i++){
+        if(mockData.locationData.carLoc[i].x<-100&&mockData.locationData.carLoc[i].heading==0){
+          mockData.locationData.carLoc[i].heading=1;
         }
-        if(mockData.locationData.carsLoc[i].y<-100&&mockData.locationData.carsLoc[i].heading==1){
-          mockData.locationData.carsLoc[i].heading=2;
+        if(mockData.locationData.carLoc[i].y<-100&&mockData.locationData.carLoc[i].heading==1){
+          mockData.locationData.carLoc[i].heading=2;
         }
-        if(mockData.locationData.carsLoc[i].x>100&&mockData.locationData.carsLoc[i].heading==2){
-          mockData.locationData.carsLoc[i].heading=3;
+        if(mockData.locationData.carLoc[i].x>100&&mockData.locationData.carLoc[i].heading==2){
+          mockData.locationData.carLoc[i].heading=3;
         }
-        if(mockData.locationData.carsLoc[i].y>100&&mockData.locationData.carsLoc[i].heading==3){
-          mockData.locationData.carsLoc[i].heading=0;
+        if(mockData.locationData.carLoc[i].y>100&&mockData.locationData.carLoc[i].heading==3){
+          mockData.locationData.carLoc[i].heading=0;
         }
 
 
-        switch(mockData.locationData.carsLoc[i].heading){
+        switch(mockData.locationData.carLoc[i].heading){
           case 0:
-          mockData.locationData.carsLoc[i].x-=0.1;
+          mockData.locationData.carLoc[i].x-=0.1;
           break;
           case 1:
-          mockData.locationData.carsLoc[i].y-=0.1;
+          mockData.locationData.carLoc[i].y-=0.1;
           break;
           case 2:
-          mockData.locationData.carsLoc[i].x+=0.1;
+          mockData.locationData.carLoc[i].x+=0.1;
           break;
           case 3:
-          mockData.locationData.carsLoc[i].y+=0.1;
+          mockData.locationData.carLoc[i].y+=0.1;
           break;
         }
       }
 
     },10);
+    */
     function distance( x1, y1, x2, y2 ) {
 
       var 	xs = x2 - x1,

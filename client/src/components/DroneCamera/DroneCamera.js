@@ -9,16 +9,17 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 class Camera extends Component {
 
   componentDidMount() {
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 50000 );
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth/2, window.innerHeight/2);
 
     var camLoc=this.props.cam;
     //Initial Camera Location
-    camera.position.x=camLoc.x;
-    camera.position.y=camLoc.y;
-    camera.position.z=camLoc.z;
-    camera.lookAt(new THREE.Vector3(0,0,0));
+    camera.position.x=3000;
+    camera.position.y=1000;
+    camera.position.z=3000;
+    var center=new THREE.Vector3(3000,0,3000)
+    camera.lookAt(center);
     console.log(camera.rotation);
 
     // document.body.appendChild( renderer.domElement );
@@ -82,7 +83,7 @@ class Camera extends Component {
       if(e.keyCode==75){//Pan down
         camLoc.rotX+=.01;
       }
-      
+
       /*
       if(e.keyCode==87){//Up
         camLoc.z-=1;

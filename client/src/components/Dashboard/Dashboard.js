@@ -10,6 +10,10 @@ import * as THREE from "three";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 
+var lift=10;
+
+var fenceHeight=10;
+
 class Dashboard extends Component {
 
   componentDidMount() {
@@ -22,34 +26,70 @@ render(){
 
   this.sceney=scene;
 
+
+
   var loader = new THREE.TextureLoader();
 
-  loader.load('./assets/metal.jpg',
+  loader.load('./assets/emptyMap.png',
+  function ( texture ) {
+    var groundMaterial=new THREE.MeshBasicMaterial({
+      map: texture
+    });
+    var plane = new THREE.Mesh(new THREE.BoxGeometry(6000,1,6000),groundMaterial);
+    plane.position.x=3000;
+    plane.position.z=3000;
+    scene.add(plane);
+
+
+
+  },
+  undefined,
+  function ( err ) {
+    console.error( 'An error happened.' );
+  }
+  );
+
+
+
+
+  var loader = new THREE.TextureLoader();
+
+  loader.load('./assets/road.jpg',
   function ( texture ) {
     var roadMaterial=new THREE.MeshBasicMaterial({
       map: texture
     });
-    var road1=new THREE.Mesh(new THREE.BoxGeometry(200,2,10),roadMaterial);
-    road1.position.x=0;
-    road1.position.y=5;
-    road1.position.z=100;
-    var road2=new THREE.Mesh(new THREE.BoxGeometry(10,2,200),roadMaterial);
-    road2.position.x=-100;
-    road2.position.y=5;
-    road2.position.z=0;
-    var road3=new THREE.Mesh(new THREE.BoxGeometry(200,2,10),roadMaterial);
-    road3.position.x=0;
-    road3.position.y=5;
-    road3.position.z=-100;
-    var road4=new THREE.Mesh(new THREE.BoxGeometry(10,2,200),roadMaterial);
-    road4.position.x=100;
-    road4.position.y=5;
-    road4.position.z=0;
+    var road1=new THREE.Mesh(new THREE.BoxGeometry(500,2,10),roadMaterial);
+    road1.position.x=2600+500/2;
+    road1.position.y=lift;
+    road1.position.z=1550;
+
+    var road2=new THREE.Mesh(new THREE.BoxGeometry(10,2,2450),roadMaterial);
+    road2.position.x=3100;
+    road2.position.y=lift;
+    road2.position.z=1550+2450/2;
+
+    var road3=new THREE.Mesh(new THREE.BoxGeometry(707,2,10),roadMaterial);
+    road3.position.x=2600-500/2;
+    road3.position.y=lift;
+    road3.position.z=1550+500/2;
+    road3.rotation.y=.78593;
+
+    var road4=new THREE.Mesh(new THREE.BoxGeometry(10,2,1900),roadMaterial);
+    road4.position.x=2100;
+    road4.position.y=lift;
+    road4.position.z=2050+1900/2;
+
+    var road5=new THREE.Mesh(new THREE.BoxGeometry(1000,2,10),roadMaterial);
+    road5.position.x=2100+1000/2;
+    road5.position.y=lift;
+    road5.position.z=3950;
 
     scene.add(road1);
     scene.add(road2);
     scene.add(road3);
     scene.add(road4);
+    scene.add(road5);
 
   },
   undefined,
@@ -59,24 +99,6 @@ render(){
 );
 
 
-var loader = new THREE.TextureLoader();
-
-loader.load('./assets/grass.jpg',
-function ( texture ) {
-  var groundMaterial=new THREE.MeshBasicMaterial({
-    map: texture
-  });
-  var plane = new THREE.Mesh(new THREE.BoxGeometry(1000,1,1000),groundMaterial);
-  scene.add(plane);
-
-
-
-},
-undefined,
-function ( err ) {
-  console.error( 'An error happened.' );
-}
-);
 
 
 
@@ -92,28 +114,56 @@ var fenceMaterial=new THREE.MeshBasicMaterial({
   opacity: 1,
   transparent: true
 });
-var fence1=new THREE.Mesh(new THREE.BoxGeometry(100,10,2),fenceMaterial);
-fence1.position.x=0;
-fence1.position.y=5;
-fence1.position.z=50;
-var fence2=new THREE.Mesh(new THREE.BoxGeometry(2,10,100),fenceMaterial);
-fence2.position.x=-50;
-fence2.position.y=5;
-fence2.position.z=0;
-var fence3=new THREE.Mesh(new THREE.BoxGeometry(100,10,2),fenceMaterial);
-fence3.position.x=0;
-fence3.position.y=5;
-fence3.position.z=-50;
-var fence4=new THREE.Mesh(new THREE.BoxGeometry(2,10,100),fenceMaterial);
-fence4.position.x=50;
-fence4.position.y=5;
-fence4.position.z=0;
+var fence1=new THREE.Mesh(new THREE.BoxGeometry(950,fenceHeight,2),fenceMaterial);
+fence1.position.x=2125+950/2;
+fence1.position.y=lift+5;
+fence1.position.z=2075;
+
+var fence2=new THREE.Mesh(new THREE.BoxGeometry(2,fenceHeight,1850),fenceMaterial);
+fence2.position.x=2125;
+fence2.position.y=lift+5;
+fence2.position.z=2075+1850/2;
+
+var fence3=new THREE.Mesh(new THREE.BoxGeometry(950,fenceHeight,2),fenceMaterial);
+fence3.position.x=2125+950/2;
+fence3.position.y=lift+5;
+fence3.position.z=2075+1850;
+
+var fence4=new THREE.Mesh(new THREE.BoxGeometry(2,fenceHeight,1850),fenceMaterial);
+fence4.position.x=2125+950;
+fence4.position.y=lift+5;
+fence4.position.z=2075+1850/2;
 
 scene.add(fence1);
 scene.add(fence2);
 scene.add(fence3);
 scene.add(fence4);
+/*
+var fence21=new THREE.Mesh(new THREE.BoxGeometry(950-10,fenceHeight/2,2),fenceMaterial);
+fence21.position.x=2125+950/2+5;
+fence21.position.y=lift+5;
+fence21.position.z=2075;
 
+var fence22=new THREE.Mesh(new THREE.BoxGeometry(2,fenceHeight/2,1850-10),fenceMaterial);
+fence22.position.x=2125+5;
+fence22.position.y=lift+5;
+fence22.position.z=2075+1850/2+5;
+
+var fence23=new THREE.Mesh(new THREE.BoxGeometry(950-10,fenceHeight/2,2),fenceMaterial);
+fence23.position.x=2125+950/2+5;
+fence23.position.y=lift+5;
+fence23.position.z=2075+1850+5;
+
+var fence24=new THREE.Mesh(new THREE.BoxGeometry(2,fenceHeight/2,1850-10),fenceMaterial);
+fence24.position.x=2125+950;
+fence24.position.y=lift+5;
+fence4.position.z=2075+1850/2+5;
+
+scene.add(fence21);
+scene.add(fence22);
+scene.add(fence23);
+scene.add(fence24);
+*/
 
 },
 undefined,
@@ -149,7 +199,6 @@ objLoader.load('./assets/trex.obj', function(object) {
 });
 });
 
-var cars=[];
 
 //Car 1
 var mtlLoader = new MTLLoader();
@@ -160,135 +209,14 @@ var objLoader = new OBJLoader();
 objLoader.setMaterials(materials);
 objLoader.load('./assets/vehicle.obj', function(object) {
   object.scale.set(5,5,5);
-  cars.push(object);
-  object.position.x=data.locationData.carsLoc[0].x;
+  object.position.x=data.locationData.carLoc.x;
   object.position.y=5;
-  object.position.z=data.locationData.carsLoc[0].y;
+  object.position.z=data.locationData.carLoc.y;
   scene.add(object);
 }, undefined,function(err){
   console.log(err);
 });
 });
-
-//Car 2
-var mtlLoader = new MTLLoader();
-mtlLoader.load('./assets/trex.mtl', function(materials) {
-materials.preload();
-var objLoader = new OBJLoader();
-
-objLoader.setMaterials(materials);
-objLoader.load('./assets/vehicle.obj', function(object) {
-  object.scale.set(5,5,5);
-  cars.push(object);
-  object.position.x=data.locationData.carsLoc[1].x;
-  object.position.y=5;
-  object.position.z=data.locationData.carsLoc[1].y;
-  scene.add(object);
-}, undefined,function(err){
-  console.log(err);
-});
-});
-
-//Car 3
-var mtlLoader = new MTLLoader();
-mtlLoader.load('./assets/trex.mtl', function(materials) {
-materials.preload();
-var objLoader = new OBJLoader();
-
-objLoader.setMaterials(materials);
-objLoader.load('./assets/vehicle.obj', function(object) {
-  object.scale.set(5,5,5);
-  cars.push(object);
-  object.position.x=data.locationData.carsLoc[2].x;
-  object.position.y=5;
-  object.position.z=data.locationData.carsLoc[2].y;
-  scene.add(object);
-}, undefined,function(err){
-  console.log(err);
-});
-});
-
-
-
-var people=[];
-var i=0;
-//Person 1
-var mtlLoader = new MTLLoader();
-mtlLoader.load('./assets/trex.mtl', function(materials) {
-materials.preload();
-var objLoader = new OBJLoader();
-
-objLoader.setMaterials(materials);
-objLoader.load('./assets/person.obj', function(object) {
-  object.scale.set(.1,.1,.1);
-  people.push(object);
-  object.position.x=data.locationData.peopleLoc[0].x;
-  object.position.y=10;
-  object.position.z=data.locationData.peopleLoc[0].y;
-  scene.add(object);
-}, undefined,function(err){
-  console.log(err);
-});
-});
-
-//Person 2
-var mtlLoader = new MTLLoader();
-mtlLoader.load('./assets/trex.mtl', function(materials) {
-materials.preload();
-var objLoader = new OBJLoader();
-
-objLoader.setMaterials(materials);
-objLoader.load('./assets/person.obj', function(object) {
-  object.scale.set(.1,.1,.1);
-  people.push(object);
-  object.position.x=data.locationData.peopleLoc[1].x;
-  object.position.y=10;
-  object.position.z=data.locationData.peopleLoc[1].y;
-  scene.add(object);
-}, undefined,function(err){
-  console.log(err);
-});
-});
-
-//Person 3
-var mtlLoader = new MTLLoader();
-mtlLoader.load('./assets/trex.mtl', function(materials) {
-materials.preload();
-var objLoader = new OBJLoader();
-
-objLoader.setMaterials(materials);
-objLoader.load('./assets/person.obj', function(object) {
-  object.scale.set(.1,.1,.1);
-  people.push(object);
-  object.position.x=data.locationData.peopleLoc[2].x;
-  object.position.y=10;
-  object.position.z=data.locationData.peopleLoc[2].y;
-  scene.add(object);
-}, undefined,function(err){
-  console.log(err);
-});
-});
-
-//Person 4
-var mtlLoader = new MTLLoader();
-mtlLoader.load('./assets/trex.mtl', function(materials) {
-materials.preload();
-var objLoader = new OBJLoader();
-
-objLoader.setMaterials(materials);
-objLoader.load('./assets/person.obj', function(object) {
-  object.scale.set(.1,.1,.1);
-  people.push(object);
-  object.position.x=data.locationData.peopleLoc[3].x;
-  object.position.y=10;
-  object.position.z=data.locationData.peopleLoc[3].y;
-  scene.add(object);
-}, undefined,function(err){
-  console.log(err);
-});
-});
-
-
 
 
 
@@ -304,11 +232,7 @@ objLoader.load('./assets/person.obj', function(object) {
       trex.position.z=data.locationData.dinoLoc.y;
       trex.rotation.y=data.locationData.dinoLoc.heading;
       //Car Movement
-      for(var i=0;i<data.locationData.carsLoc.length;i++){
-        cars[i].position.x=data.locationData.carsLoc[i].x;
-        cars[i].position.z=data.locationData.carsLoc[i].y;
-        cars[i].rotation.y=data.locationData.carsLoc[i].heading*Math.PI/2-Math.PI/2;
-      }
+
     },10);
   }
 
@@ -340,16 +264,7 @@ objLoader.load('./assets/person.obj', function(object) {
     <Camera camID="0" scene={this.sceney} location={this.props.data.locationData}></Camera>
     </div>
     </div>
-    <div className="col-4">
-    <div className="widget">
-    <Camera camID="1" scene={this.sceney} location={this.props.data.locationData}></Camera>
-    </div>
-    </div>
-    <div className="col-4">
-    <div className="widget">
-    <Camera camID="2" scene={this.sceney} location={this.props.data.locationData}></Camera>
-    </div>
-    </div>
+
     </div>
 
     </div>
