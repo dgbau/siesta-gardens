@@ -8,8 +8,8 @@ const mockData = {
         rotZ:0
     },
     "locationData": {
-        "dinoLoc": {x:0,y:0,heading:0},
-        "carLoc": {x:100,y:100,heading:0},
+        "dinoLoc": {x:2500,y:2500,heading:0},
+        "carLoc": {x:3100,y:1550,heading:0},
     },
     "perimeterData": {
         "sections": [0,0,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],

@@ -9,11 +9,11 @@ import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 class Camera extends Component {
 
   componentDidMount() {
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 50000 );
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth/4, window.innerHeight/4 );
 
-    var camLoc=this.props.location.carsLoc[this.props.camID];
+    var camLoc=this.props.location.carLoc;
 
     camera.position.x=camLoc.x;
     camera.position.y=10;
@@ -29,7 +29,7 @@ class Camera extends Component {
     var animate = function () {
       requestAnimationFrame( animate );
       //console.log(camera.position);
-      var camLoc=data.location.carsLoc[camID];
+      var camLoc=data.location.carLoc;
       camera.position.x=camLoc.x;
       camera.position.y=17;
       camera.position.z=camLoc.y;
