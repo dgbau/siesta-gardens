@@ -12,17 +12,11 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-
 @app.route('/')
 @app.route('/index')
 @cross_origin()
 def index():
     return "Hello, Barney!"
-
-@app.route('/users')
-@cross_origin()
-def get_users():
-    return jsonify(helpers.create_fake_users(10))
 
 @app.route('/locs')
 @cross_origin()
@@ -32,12 +26,27 @@ def get_data():
         "car": car_loc()
     })
 
-@app.route('/client')
+@app.route('/park-state')
 @cross_origin()
-def get_client():
-    return str(c)
-
-@app.route('/locs')
-@cross_origin()
-def get_locs():
-    return "ALL THE LOCATIONS"
+def get_state():
+    return jsonify({
+    "camData": {
+        "x":0,
+        "y":200,
+        "z":0,
+        "rotX":-1.57,
+        "rotY":0,
+        "rotZ":0
+    },
+    "locationData": {
+        "dinoLoc": dino_loc(),
+        "carLoc": car_loc(),
+    },
+    "perimeterData": {
+        "sections": [0,0,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        "tripwireAlert": False
+    },
+    "clientData": {
+        "clients": helpers.create_fake_users(10)
+    }
+})
