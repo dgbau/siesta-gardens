@@ -39,7 +39,8 @@ class Camera extends Component {
       camera.position.x=camLoc.x;
       camera.position.y=17;
       camera.position.z=camLoc.y;
-      camera.lookAt(new THREE.Vector3(10,10,1));
+      camera.lookAt(new THREE.Vector3(data.location.dinoLoc.x,10,data.location.dinoLoc.y));
+
 
       renderer.render( sceney, camera );
     };

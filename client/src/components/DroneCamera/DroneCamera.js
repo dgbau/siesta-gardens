@@ -25,7 +25,7 @@ class Camera extends Component {
     camera.position.y=1000;
     camera.position.z=3000;
     var center=new THREE.Vector3(3000,0,3000)
-    camera.lookAt(center);
+    //camera.lookAt(center);
     console.log(camera.rotation);
 
     // document.body.appendChild( renderer.domElement );

@@ -11,8 +11,9 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 
 var lift = 10;
-
 var fenceHeight = 10;
+var OFFSET=3000;
+
 
 class Dashboard extends Component {
   componentDidMount() {}
@@ -35,8 +36,8 @@ class Dashboard extends Component {
           new THREE.BoxGeometry(6000, 1, 6000),
           groundMaterial
         );
-        plane.position.x = 3000;
-        plane.position.z = 3000;
+        plane.position.x = 3000-OFFSET;
+        plane.position.z = 3000-OFFSET;
         scene.add(plane);
       },
       undefined,
@@ -57,42 +58,42 @@ class Dashboard extends Component {
           new THREE.BoxGeometry(500, 2, 10),
           roadMaterial
         );
-        road1.position.x = 2600 + 500 / 2;
+        road1.position.x = 2600 + 500 / 2-OFFSET;
         road1.position.y = lift;
-        road1.position.z = 1550;
+        road1.position.z = 1550-OFFSET;
 
         var road2 = new THREE.Mesh(
           new THREE.BoxGeometry(10, 2, 2450),
           roadMaterial
         );
-        road2.position.x = 3100;
+        road2.position.x = 3100-OFFSET;
         road2.position.y = lift;
-        road2.position.z = 1550 + 2450 / 2;
+        road2.position.z = 1550 + 2450 / 2-OFFSET;
 
         var road3 = new THREE.Mesh(
           new THREE.BoxGeometry(707, 2, 10),
           roadMaterial
         );
-        road3.position.x = 2600 - 500 / 2;
+        road3.position.x = 2600 - 500 / 2-OFFSET;
         road3.position.y = lift;
-        road3.position.z = 1550 + 500 / 2;
+        road3.position.z = 1550 + 500 / 2-OFFSET;
         road3.rotation.y = 0.78593;
 
         var road4 = new THREE.Mesh(
           new THREE.BoxGeometry(10, 2, 1900),
           roadMaterial
         );
-        road4.position.x = 2100;
+        road4.position.x = 2100-OFFSET;
         road4.position.y = lift;
-        road4.position.z = 2050 + 1900 / 2;
+        road4.position.z = 2050 + 1900 / 2-OFFSET;
 
         var road5 = new THREE.Mesh(
           new THREE.BoxGeometry(1000, 2, 10),
           roadMaterial
         );
-        road5.position.x = 2100 + 1000 / 2;
+        road5.position.x = 2100 + 1000 / 2-OFFSET;
         road5.position.y = lift;
-        road5.position.z = 3950;
+        road5.position.z = 3950-OFFSET;
 
         scene.add(road1);
         scene.add(road2);
@@ -120,33 +121,33 @@ class Dashboard extends Component {
           new THREE.BoxGeometry(950, fenceHeight, 2),
           fenceMaterial
         );
-        fence1.position.x = 2125 + 950 / 2;
+        fence1.position.x = 2125 + 950 / 2-OFFSET;
         fence1.position.y = lift + 5;
-        fence1.position.z = 2075;
+        fence1.position.z = 2075-OFFSET;
 
         var fence2 = new THREE.Mesh(
           new THREE.BoxGeometry(2, fenceHeight, 1850),
           fenceMaterial
         );
-        fence2.position.x = 2125;
+        fence2.position.x = 2125-OFFSET;
         fence2.position.y = lift + 5;
-        fence2.position.z = 2075 + 1850 / 2;
+        fence2.position.z = 2075 + 1850 / 2-OFFSET;
 
         var fence3 = new THREE.Mesh(
           new THREE.BoxGeometry(950, fenceHeight, 2),
           fenceMaterial
         );
-        fence3.position.x = 2125 + 950 / 2;
+        fence3.position.x = 2125 + 950 / 2-OFFSET;
         fence3.position.y = lift + 5;
-        fence3.position.z = 2075 + 1850;
+        fence3.position.z = 2075 + 1850-OFFSET;
 
         var fence4 = new THREE.Mesh(
           new THREE.BoxGeometry(2, fenceHeight, 1850),
           fenceMaterial
         );
-        fence4.position.x = 2125 + 950;
+        fence4.position.x = 2125 + 950-OFFSET;
         fence4.position.y = lift + 5;
-        fence4.position.z = 2075 + 1850 / 2;
+        fence4.position.z = 2075 + 1850 / 2-OFFSET;
 
         scene.add(fence1);
         scene.add(fence2);
@@ -216,6 +217,7 @@ scene.add(fence24);
       );
     });
 
+    var car;
     //Car 1
     var mtlLoader = new MTLLoader();
     mtlLoader.load("./assets/trex.mtl", function (materials) {
@@ -226,6 +228,7 @@ scene.add(fence24);
       objLoader.load(
         "./assets/vehicle.obj",
         function (object) {
+          car=object;
           object.scale.set(5, 5, 5);
           object.position.x = data.locationData.carLoc.x;
           object.position.y = 5;
@@ -246,10 +249,13 @@ scene.add(fence24);
     function updateObjs() {
       setInterval(function () {
         //Dinosaur Movement
-        trex.position.x = data.locationData.dinoLoc.x;
-        trex.position.z = data.locationData.dinoLoc.y;
+        trex.position.x = data.locationData.dinoLoc.x-OFFSET;
+        trex.position.z = data.locationData.dinoLoc.y-OFFSET;
         trex.rotation.y = data.locationData.dinoLoc.heading;
         //Car Movement
+        car.position.x = data.locationData.carLoc.x-OFFSET;
+        car.position.z = data.locationData.carLoc.y-OFFSET;
+        car.rotation.y = data.locationData.carLoc.heading;
       }, 10);
     }
 

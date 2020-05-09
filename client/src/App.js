@@ -10,6 +10,22 @@ import mockData from "./fakeData"
 
 class App extends Component{
   componentDidMount(){
+    setInterval(
+      () =>
+        fetch("http://127.0.0.1:5000/locs")
+          .then((res) => res.json())
+          .then((result) => {
+            mockData.locationData.dinoLoc.x=result.dino[0];
+            mockData.locationData.dinoLoc.y=result.dino[1];
+
+            console.log(result.car[0]);
+            mockData.locationData.carLoc.x=result.car[0];
+            mockData.locationData.carLoc.y=result.car[1];
+
+
+          }),
+      1000
+    );
     /*
     setInterval(function(){
       //Simulate Dinosaur Moving Around
