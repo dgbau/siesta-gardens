@@ -1,5 +1,5 @@
-import React, { Component, } from "react";
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+import React, { Component } from "react";
+// import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Map.scss";
 export default class MapC extends Component {
   constructor(props) {
@@ -10,44 +10,49 @@ export default class MapC extends Component {
       lat: 27.275,
       lng: -82.555,
       zoom: 14,
-      testPos: [27.275, -82.555]
+      testPos: [27.275, -82.555],
     };
   }
 
   componentDidMount() {
-    setInterval(() => 
-    fetch('http://127.0.0.1:5000/locs')
-      .then(res => res.json())
-      .then((result) => {
-        this.setState({
-          isLoaded: true,
-          locs: result
-        });
-        console.log(result);
-        // setLocs(result)
-      }), 1000)
+    setInterval(
+      () =>
+        fetch("http://127.0.0.1:5000/locs")
+          .then((res) => res.json())
+          .then((result) => {
+            this.setState({
+              isLoaded: true,
+              locs: result,
+            });
+            console.log(result);
+            // setLocs(result)
+          }),
+      1000
+    );
   }
 
   render() {
-    console.log(this.props.data)
+    console.log(this.props.data);
     return this.state.isLoaded ? (
-      <Map
-        center={[this.state.lat, this.state.lng]}
-        zoom={this.state.zoom}
-        style={{ width: "100%", height: "400px" }}
-      >
-        <Marker position={this.state.locs.dino}>
-          <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
-        </Marker>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &amp; USGS'
-          url="http://tile.mtbmap.cz/mtbmap_tiles/{z}/{x}/{y}.png"
+      <svg>
+        <rect x="0" y="0" height="600" width="600" style="fill: #000000" />
+
+        <image
+          x="0"
+          y="0"
+          width="600"
+          height="600"
+          href="images/SGMap.png"
         />
-        {/* <TileLayer
-          attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        /> */}
-      </Map>
+
+        <line
+          x1="25"
+          y1="80"
+          x2="350"
+          y2="80"
+          style="stroke: #ffffff; stroke-width: 3;"
+        />
+      </svg>
     ) : (
       "Data is loading..."
     );

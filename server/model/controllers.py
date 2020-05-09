@@ -2,14 +2,10 @@ import math, random
 import server.model.Main
 
 def dino_loc():
-    return [random.uniform(27.28, 27.29), random.uniform(-82.55, -82.56)]
+    return [random.uniform(2150, 3050), random.uniform(2100, 3900)]
 
-def cars_loc(): 
-    return {
-        "car1": [random.uniform(12, 13), random.uniform(12, 13)],
-        "car2": [random.uniform(12, 13), random.uniform(12, 13)],
-        "car3": [random.uniform(12, 13), random.uniform(12, 13)]
-    }
+def car_loc(): 
+    return [random.uniform(1500, 4500), random.uniform(1500, 4500)]
 
 
 def get_state():

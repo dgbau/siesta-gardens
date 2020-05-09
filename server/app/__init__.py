@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, disconnect, emit
 from flask_cors import CORS, cross_origin
 from server.app import helpers
 from server.model.Client import Client
-from server.model.controllers import dino_loc, cars_loc
+from server.model.controllers import dino_loc, car_loc
 
 c = Client("david", "bau", 1)
 print(c)
@@ -29,7 +29,7 @@ def get_users():
 def get_data():
     return jsonify({
         "dino": dino_loc(),
-        "cars": cars_loc()
+        "car": car_loc()
     })
 
 @app.route('/client')
