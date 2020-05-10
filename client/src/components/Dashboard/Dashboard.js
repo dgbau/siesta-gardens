@@ -158,31 +158,31 @@ class Dashboard extends Component {
         scene.add(fence3);
         scene.add(fence4);
         /*
-var fence21=new THREE.Mesh(new THREE.BoxGeometry(950-10,fenceHeight/2,2),fenceMaterial);
-fence21.position.x=2125+950/2+5;
-fence21.position.y=lift+5;
-fence21.position.z=2075;
+        var fence21=new THREE.Mesh(new THREE.BoxGeometry(950-10,fenceHeight/2,2),fenceMaterial);
+        fence21.position.x=2125+950/2+5;
+        fence21.position.y=lift+5;
+        fence21.position.z=2075;
 
-var fence22=new THREE.Mesh(new THREE.BoxGeometry(2,fenceHeight/2,1850-10),fenceMaterial);
-fence22.position.x=2125+5;
-fence22.position.y=lift+5;
-fence22.position.z=2075+1850/2+5;
+        var fence22=new THREE.Mesh(new THREE.BoxGeometry(2,fenceHeight/2,1850-10),fenceMaterial);
+        fence22.position.x=2125+5;
+        fence22.position.y=lift+5;
+        fence22.position.z=2075+1850/2+5;
 
-var fence23=new THREE.Mesh(new THREE.BoxGeometry(950-10,fenceHeight/2,2),fenceMaterial);
-fence23.position.x=2125+950/2+5;
-fence23.position.y=lift+5;
-fence23.position.z=2075+1850+5;
+        var fence23=new THREE.Mesh(new THREE.BoxGeometry(950-10,fenceHeight/2,2),fenceMaterial);
+        fence23.position.x=2125+950/2+5;
+        fence23.position.y=lift+5;
+        fence23.position.z=2075+1850+5;
 
-var fence24=new THREE.Mesh(new THREE.BoxGeometry(2,fenceHeight/2,1850-10),fenceMaterial);
-fence24.position.x=2125+950;
-fence24.position.y=lift+5;
-fence4.position.z=2075+1850/2+5;
+        var fence24=new THREE.Mesh(new THREE.BoxGeometry(2,fenceHeight/2,1850-10),fenceMaterial);
+        fence24.position.x=2125+950;
+        fence24.position.y=lift+5;
+        fence4.position.z=2075+1850/2+5;
 
-scene.add(fence21);
-scene.add(fence22);
-scene.add(fence23);
-scene.add(fence24);
-*/
+        scene.add(fence21);
+        scene.add(fence22);
+        scene.add(fence23);
+        scene.add(fence24);
+        */
       },
       undefined,
       function (err) {
@@ -190,7 +190,9 @@ scene.add(fence24);
       }
     );
 
-    var data = this.props.data;
+    var data = this.props.zdata.data;
+
+
 
     var trex;
 
@@ -207,7 +209,7 @@ scene.add(fence24);
           object.scale.set(2, 2, 2);
           object.traverse(function (child) {
             if (child instanceof THREE.Mesh)
-              child.material.color.setHex(0xff0000);
+            child.material.color.setHex(0xff0000);
           });
           object.position.x = 10;
           object.position.y = 20;
@@ -252,61 +254,72 @@ scene.add(fence24);
 
     function updateObjs() {
       setInterval(function () {
-        //Dinosaur Movement
-        trex.position.x = data.locationData.dinoLoc.x-OFFSET;
-        trex.position.z = data.locationData.dinoLoc.y-OFFSET;
-        trex.rotation.y = data.locationData.dinoLoc.heading;
-        //Car Movement
-        car.position.x = data.locationData.carLoc.x-OFFSET;
-        car.position.z = data.locationData.carLoc.y-OFFSET;
-        car.rotation.y = data.locationData.carLoc.heading;
-      }, 10);
+        fetch("http://127.0.0.1:5000/park-state")
+        .then((res) => res.json())
+        .then((result) => {
+          var data=result;
+          //Dinosaur Movement
+          if(data){
+            trex.position.x = data.locationData.dinoLoc.x-OFFSET;
+            trex.position.z = data.locationData.dinoLoc.y-OFFSET;
+            trex.rotation.y = data.locationData.dinoLoc.heading;
+            //Car Movement
+            car.position.x = data.locationData.carLoc.x-OFFSET;
+            car.position.z = data.locationData.carLoc.y-OFFSET;
+            car.rotation.y = data.locationData.carLoc.heading;
+          }
+
+        })
+
+
+
+      }, 500);
     }
 
 
     console.log("dashboard props", this.props.data)
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-5">
-            <div className="widget">
-              <Map data={this.props.data.locationData}></Map>
-            </div>
-          </div>
-          <div className="col-4">
-            <div className="widget">
-              <Charts data={this.props.data}></Charts>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="widget">
-              <ClientList
-                data={this.props.data.clientData.clients}
-              ></ClientList>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6">
-            <div id="dronecamera">
-              <DroneCamera
-                camID="3"
-                cam={this.props.data.camData}
-                scene={this.sceney}
-                location={this.props.data.locationData}
-              ></DroneCamera>
-            </div>
-          </div>
-          <div className="col-6">
-              <Camera
-                camID="0"
-                scene={this.sceney}
-                location={this.props.data.locationData}
-              ></Camera>
-            </div>
-        </div>
+      <div className="row">
+      <div className="col-5">
+      <div className="widget">
+      <Map data={this.props.data.locationData}></Map>
+      </div>
+      </div>
+      <div className="col-4">
+      <div className="widget">
+      <Charts data={this.props.data}></Charts>
+      </div>
+      </div>
+      <div className="col-3">
+      <div className="widget">
+      <ClientList
+      data={this.props.data.clientData.clients}
+      ></ClientList>
+      </div>
+      </div>
+      </div>
+      <div className="row">
+      <div className="col-6">
+      <div id="dronecamera">
+      <DroneCamera
+      camID="3"
+      cam={this.props.data.camData}
+      scene={this.sceney}
+      location={this.props.data.locationData}
+      ></DroneCamera>
+      </div>
+      </div>
+      <div className="col-6">
+      <Camera
+      camID="0"
+      scene={this.sceney}
+      location={this.props.data.locationData}
+      ></Camera>
+      </div>
+      </div>
 
-        <div className="row"></div>
+      <div className="row"></div>
       </div>
     );
   }
