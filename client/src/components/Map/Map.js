@@ -10,6 +10,9 @@ export default class MapC extends Component {
     };
   }
   fakeFence = [0,0,1,2]
+  scale = 520
+  ratio = 3000 / this.scale
+  
 
   componentDidMount() {
   }
@@ -26,28 +29,28 @@ export default class MapC extends Component {
 
   render() {
     return this.props ? (
-      <svg height="375" width="375">
-        <rect x="0" y="0" height="375" width="375" />
+      <svg height={this.scale} width={this.scale}>
+        <rect x="0" y="0" height={this.scale} width={this.scale} />
 
         <image
           x="0"
           y="0"
-          width="375"
-          height="375"
+          width={this.scale}
+          height={this.scale}
           href="images/SGMap_center1.jpg"
         />
 
         {/* TOP */}
-        <line x1={(2150 - 1500) / 8} y1={(2100 - 1500) / 8} x2={(3050 - 1500) / 8} y2={(2100 - 1500) / 8} stroke={this.fenceColor(this.fakeFence[0])} strokeWidth="2px"/>
+        <line x1={(2150 - 1500) / this.ratio} y1={(2100 - 1500) / this.ratio} x2={(3050 - 1500) / this.ratio} y2={(2100 - 1500) / this.ratio} stroke={this.fenceColor(this.fakeFence[0])} strokeWidth="2px"/>
         {/* RIGHT */}
-        <line x1={(3050 - 1500) / 8} y1={(2100 - 1500) / 8} x2={(3050 - 1500) / 8} y2={(3900 - 1500) / 8} stroke={this.fenceColor(this.fakeFence[1])} strokeWidth="2px"/>
+        <line x1={(3050 - 1500) / this.ratio} y1={(2100 - 1500) / this.ratio} x2={(3050 - 1500) / this.ratio} y2={(3900 - 1500) / this.ratio} stroke={this.fenceColor(this.fakeFence[1])} strokeWidth="2px"/>
         {/* BOTTOM */}
-        <line x1={(2150 - 1500) / 8} y1={(3900 - 1500) / 8} x2={(3050 - 1500) / 8} y2={(3900 - 1500) / 8} stroke={this.fenceColor(this.fakeFence[2])} strokeWidth="2px"/>
+        <line x1={(2150 - 1500) / this.ratio} y1={(3900 - 1500) / this.ratio} x2={(3050 - 1500) / this.ratio} y2={(3900 - 1500) / this.ratio} stroke={this.fenceColor(this.fakeFence[2])} strokeWidth="2px"/>
         {/* LEFT */}
-        <line x1={(2150 - 1500) / 8} y1={(2100 - 1500) / 8} x2={(2150 - 1500) / 8} y2={(3900 - 1500) / 8} stroke={this.fenceColor(this.fakeFence[3])} strokeWidth="2px"/>
+        <line x1={(2150 - 1500) / this.ratio} y1={(2100 - 1500) / this.ratio} x2={(2150 - 1500) / this.ratio} y2={(3900 - 1500) / this.ratio} stroke={this.fenceColor(this.fakeFence[3])} strokeWidth="2px"/>
 
-        <circle cx={((this.props.data.dinoLoc.x - 1500) / 8)} cy={((this.props.data.dinoLoc.y - 1500) / 8) } r={5} fill={'red'}></circle>
-        <circle cx={((this.props.data.carLoc.x - 1500) / 8)} cy={((this.props.data.carLoc.y - 1500) / 8) } r={5} fill={'blue'}></circle>
+        <circle cx={((this.props.data.dinoLoc.x - 1500) / this.ratio)} cy={((this.props.data.dinoLoc.y - 1500) / this.ratio) } r={5} fill={'red'}></circle>
+        <circle cx={((this.props.data.carLoc.x - 1500) / this.ratio)} cy={((this.props.data.carLoc.y - 1500) / this.ratio) } r={5} fill={'blue'}></circle>
       </svg>
     ) : (
       "Data is loading..."

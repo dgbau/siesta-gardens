@@ -53,7 +53,7 @@ def get_state():
         },
     },
     "perimeterData": {
-        "sections": [0,0,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        "sections": [0,1,2,0],
         "tripwireAlert": False
     },
     "clientData": {

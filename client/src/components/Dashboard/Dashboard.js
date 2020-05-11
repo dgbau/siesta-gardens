@@ -268,19 +268,23 @@ scene.add(fence24);
     return (
       <div className="container">
         <div className="row">
-          <div className="col-5">
+          <div className="col-6">
             <div className="widget">
               <Map data={this.props.data.locationData}></Map>
             </div>
           </div>
-          <div className="col-4">
-            <div className="widget">
-              <Charts data={this.props.data}></Charts>
+          <div className="col-3">
+          <div className="widget">
+              <ClientList
+                title={"Touring"}
+                data={this.props.data.clientData.clients}
+              ></ClientList>
             </div>
           </div>
           <div className="col-3">
             <div className="widget">
               <ClientList
+                title={"Queued"}
                 data={this.props.data.clientData.clients}
               ></ClientList>
             </div>
