@@ -17,13 +17,15 @@ class Facilities:
         current_fence = self._sensors.fence_triggered()
         current_sensors = self._sensors.trip_triggered()
         if current_sensors != self._ideal_sensors:
-            # Activate BIG PROBLEM mode
+            # dino_disabled = dinosaur.activate_disabler(True)
+            #if dino_disabled == (proper_code) ...?????????
             pass
         # Updates fence
         if current_fence != self._ideal_sensors:
             self._fence.update_fence(current_fence)
+            # Activate car return people
 
-    # Returns fence integrity as list of integers where 0 is broken, 1 is functional
+    # Returns fence integrity as list of integers where 0 is whole, 1 is damaged, 2 is broken
     # Return format: [1, 1, 1, 1]
     def fence_integrity(self):
         return self._fence.fence_integrity()
