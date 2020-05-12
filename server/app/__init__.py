@@ -60,3 +60,13 @@ def get_state():
         "clients": helpers.create_fake_users(10)
     }
 })
+
+
+@app.route('/chaos')
+@cross_origin()
+def go_dumb():
+    print("BERZERKER!!!!!!")
+    # import some method and call it here to break the fence
+    return jsonify({
+        "message": "GO DUMB."
+    })

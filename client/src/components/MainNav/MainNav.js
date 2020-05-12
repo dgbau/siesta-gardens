@@ -60,18 +60,27 @@ class NavDropdown extends React.Component {
 }
 
 function MainNav(props) {
+
+  function makeChaos() {
+    fetch("http://127.0.0.1:5000/chaos")
+          .then((res) => res.json())
+          .then((result) => {
+            console.log("button clicked => ", result)
+          })
+  }
   return (
     <nav className="navbar navbar-expand">
       <a className="navbar-brand" href="/">
         <img src="/images/trex.png" alt="DP logo" width="60px" height="auto"/>
       </a>
+      <button className="btn-danger" onClick={makeChaos}>The Big Red Button </button>
 
       <div className="navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           
           {/* <NavItem path="/" name="Home" /> */}
           {/* <NavItem path="/about" name="About" /> */}
-          <NavItem path="/" name="Home" />
+          {/* <NavItem path="/" name="Home" /> */}
           {/* <NavDropdown name="Artists">
             <a className="dropdown-item" href="/Artist1">
               Artist 1
@@ -83,8 +92,8 @@ function MainNav(props) {
               Artist 3
             </a>
           </NavDropdown> */}
-          <NavItem path="/clients" name="Clients" />
-          <NavItem path="/map" name="Map" />
+          {/* <NavItem path="/clients" name="Clients" /> */}
+          {/* <NavItem path="/map" name="Map" /> */}
         </ul>
       </div>
     </nav>
