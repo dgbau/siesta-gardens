@@ -1,11 +1,13 @@
 import math, random
 import server.model.Main
-import Main
+from .Simulator import Simulator
+
+simulator = Simulator()
 
 def dino_loc():
-    return [simulator.get_x_dino(), simulator.get_y_dino())]
+    return [simulator.get_x_dino(), simulator.get_y_dino()]
 
-def car_loc(): 
+def car_loc():
     return [random.uniform(1500, 4500), random.uniform(1500, 4500)]
 
 

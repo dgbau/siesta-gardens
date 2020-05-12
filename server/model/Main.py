@@ -1,3 +1,3 @@
 from .Simulator import Simulator
 
-simulator = new Simulator()
+#simulator = Simulator()

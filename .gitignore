@@ -9,6 +9,7 @@
 client/node_modules
 client/.pnp
 .pnp.js
+ls
 
 # testing
 client/coverage
