@@ -42,7 +42,8 @@ class Simulator:
                 ###### dino
             if (self._x_dino == x_dino_dest and self._y_dino == y_dino_dest) or np.arctan((y_dino_dest- self._y_dino)/(x_dino_dest- self._x_dino)) != self._rad_dino:
                 self._reached_dest = True
-
+            print( str(self._x_dino) + " is the location of the dino in x")
+            print( str(self._y_dino) + " is the location of the dino in y")
             self._x_dino += x_dino_step
             self._y_dino += y_dino_step
             ###### car
