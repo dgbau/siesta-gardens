@@ -3,6 +3,7 @@ import server.model.Main
 from .Simulator import Simulator
 
 simulator = Simulator()
+simulator.start()
 
 def dino_loc():
     return [simulator.get_x_dino(), simulator.get_y_dino()]
