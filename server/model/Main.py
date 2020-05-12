@@ -1,4 +1,3 @@
+from .Simulator import Simulator
 
-
-def get_car_locs():
-    return "car locs"
+simulator = new Simulator()
