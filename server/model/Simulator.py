@@ -41,8 +41,12 @@ class Simulator:
     def get_y_car(self):
         return self._y_car
 
+    _stop_car = False
+    def stop_car(self):
+        self._stop_car = True
 
-
+    def start_car(self):
+        self._stop_car = False
     def get_person(self):
         first_name = fake.first_name()
         last_name = fake.last_name()
@@ -90,24 +94,24 @@ class Simulator:
                 self._x_dino += x_dino_step
                 self._y_dino += y_dino_step
             ###### car
-            if self._reached_dest_car:
-                if self._dest_index_car >= len(self._x_road) - 1:
-                    self._dest_index_car = 0
-                else:
-                    self._dest_index_car += 1
-                x_car_dest = self._x_road[self._dest_index_car]
-                y_car_dest = self._y_road[self._dest_index_car]
-                d_car = np.sqrt((y_car_dest- self._y_car)**2+(x_car_dest-self._x_car)**2)
-                x_car_step = self._car_step_size*((x_car_dest- self._x_car)/d_car)
-                y_car_step = self._car_step_size*((y_car_dest- self._y_car)/d_car)
-                self._reached_dest_car = False
-            if (np.sqrt((y_car_dest - self._y_car) ** 2 + (x_car_dest - self._x_car) ** 2) < np.sqrt((x_car_step) ** 2 + (y_car_step) ** 2)):
-                self._reached_dest_car = True
-                self._x_car = x_car_dest
-                self._y_car = y_car_dest
-                continue
-            print( str(self._x_car) + " is the location of the car in x")
-            print( str(self._y_car) + " is the location of the car in y")
-            self._x_car += x_car_step
-            self._y_car += y_car_step
-
+            if not _stop_car:
+                if self._reached_dest_car:
+                    if self._dest_index_car >= len(self._x_road) - 1:
+                        self._dest_index_car = 0
+                    else:
+                        self._dest_index_car += 1
+                    x_car_dest = self._x_road[self._dest_index_car]
+                    y_car_dest = self._y_road[self._dest_index_car]
+                    d_car = np.sqrt((y_car_dest- self._y_car)**2+(x_car_dest-self._x_car)**2)
+                    x_car_step = self._car_step_size*((x_car_dest- self._x_car)/d_car)
+                    y_car_step = self._car_step_size*((y_car_dest- self._y_car)/d_car)
+                    self._reached_dest_car = False
+                if (np.sqrt((y_car_dest - self._y_car) ** 2 + (x_car_dest - self._x_car) ** 2) < np.sqrt((x_car_step) ** 2 + (y_car_step) ** 2)):
+                    self._reached_dest_car = True
+                    self._x_car = x_car_dest
+                    self._y_car = y_car_dest
+                    continue
+                print( str(self._x_car) + " is the location of the car in x")
+                print( str(self._y_car) + " is the location of the car in y")
+                self._x_car += x_car_step
+                self._y_car += y_car_step
