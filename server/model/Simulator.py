@@ -5,7 +5,6 @@ from . import Datastore
 from faker import Faker
 fake = Faker()
 
-
 class Simulator:
 
     _buffer = 20
@@ -68,12 +67,6 @@ class Simulator:
         for i in range(people_count):
             self.get_person()
 
-    # TODO CHECK DINO HIT WALL
-    # TODO GET PEOPLE IN CAR ACCORDING TO SAD
-    # TODO TRIP WIRE, DISABLE DINO
-    # def dino_angry(self):
-        # TODO MAKE DINO RUN AT CAR FULL SPEED
-
 
     def start(self):
         x_dino_step = 0
@@ -94,6 +87,12 @@ class Simulator:
                 d_dino = np.sqrt((y_dino_dest- self._y_dino)**2+(x_dino_dest-self._x_dino)**2)
                 x_dino_step = self._dino_step_size*((x_dino_dest- self._x_dino)/d_dino)
                 y_dino_step = self._dino_step_size*((y_dino_dest- self._y_dino)/d_dino)
+                if x_dino_dest = self._x_dino and y_dino_dest>=self._y_dino:
+                    self._rad_dino = np.pi
+                elif x_dino_dest = self._x_dino and y_dino_dest<=self._y_dino:
+                    self._rad_dino = 0
+                else:
+                    self._rad_dino = np.arctan((y_dino_dest-self._y_dino)/(x_dino_dest- self._x_dino)) + (np.pi/2)
                 self._reached_dest_dino = False
             if (np.sqrt((y_dino_dest - self._y_dino) ** 2 + (x_dino_dest - self._x_dino) ** 2) < np.sqrt(
                     (x_dino_step) ** 2 + (y_dino_step) ** 2)):
@@ -118,6 +117,12 @@ class Simulator:
                     d_car = np.sqrt((y_car_dest- self._y_car)**2+(x_car_dest-self._x_car)**2)
                     x_car_step = self._car_step_size*((x_car_dest- self._x_car)/d_car)
                     y_car_step = self._car_step_size*((y_car_dest- self._y_car)/d_car)
+                    if x_car_dest = self._x_car and y_car_dest>=self._y_car:
+                        self._rad_car = np.pi
+                    elif x_car_dest = self._x_car and y_car_dest<=self._y_car:
+                        self._rad_car = 0
+                    else:
+                        self._rad_car = np.arctan((y_car_dest-self._y_car)/(x_car_dest- self._x_car)) + (np.pi/2)
                     self._reached_dest_car = False
                 if (np.sqrt((y_car_dest - self._y_car) ** 2 + (x_car_dest - self._x_car) ** 2) < np.sqrt((x_car_step) ** 2 + (y_car_step) ** 2)):
                     self._reached_dest_car = True
