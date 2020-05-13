@@ -13,7 +13,7 @@ function ClientList(props) {
           return (
             <li key={idx}>
               <div>{firstName} {lastName}</div>
-              <div className="subtitle">{location}</div>
+              <div className={"subtitle " + location}>{location}</div>
             </li>
           );
         })}
