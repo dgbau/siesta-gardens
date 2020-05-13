@@ -85,7 +85,7 @@ export default class MapC extends Component {
           cx={(this.props.data.locationData.carLoc.x - 1500) / this.ratio}
           cy={(this.props.data.locationData.carLoc.y - 1500) / this.ratio}
           r={5}
-          fill={"blue"}
+          fill={"#00f7ff"}
         ></circle>
       </svg>
     ) : (
