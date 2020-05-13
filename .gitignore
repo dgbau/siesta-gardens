@@ -39,6 +39,8 @@ __pycache__
 # C extensions
 server/*.so
 
+server/data.csv
+
 # Distribution / packaging
 server/.Python
 server/build/
