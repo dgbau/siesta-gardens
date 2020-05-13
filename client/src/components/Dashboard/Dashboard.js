@@ -213,151 +213,187 @@ class Dashboard extends Component {
       var data = this.props.data
       // var trex;
 
-      var mtlLoader = new MTLLoader();
-      mtlLoader.load("./assets/trex.mtl", function (materials) {
-        materials.preload();
-        var objLoader = new OBJLoader();
+      var objLoader = new OBJLoader();
 
-        objLoader.setMaterials(materials);
-        objLoader.load(
-          "./assets/trex.obj",
-          function (object) {
-            trex = object;
-            object.scale.set(2, 2, 2);
-            object.traverse(function (child) {
-              if (child instanceof THREE.Mesh)
-              child.material.color.setHex(0xff0000);
-            });
-            object.position.x = 10;
-            object.position.y = 20;
-            object.position.z = 10;
-            scene.add(object);
-          },
-          undefined,
-          function (err) {
-            console.log(err);
-          }
-        );
-      });
-
-      // var car;
-      //Car 1
-      var mtlLoader = new MTLLoader();
-      mtlLoader.load("./assets/trex.mtl", function (materials) {
-        materials.preload();
-        var objLoader = new OBJLoader();
-
-        objLoader.setMaterials(materials);
-        objLoader.load(
-          "./assets/vehicle.obj",
-          function (object) {
-            car = object;
-            object.scale.set(5, 5, 5);
-            object.position.x = data.locationData.carLoc.x;
-            object.position.y = 5;
-            object.position.z = data.locationData.carLoc.y;
-            scene.add(object);
-          },
-          undefined,
-          function (err) {
-            console.log(err);
-          }
-        );
-      });
-
-      //Update Dinosaurs Location
-
-      // setTimeout(updateObjs, 5000);
-      function updateStuff() {
-        if (this.props.data && trex) {
-          console.log('trex', trex)
-          trex.position.x = this.props.data.locationData.dinoLoc.x - OFFSET;
-          trex.position.z = this.props.data.locationData.dinoLoc.y - OFFSET;
-          trex.rotation.y = this.props.data.locationData.dinoLoc.heading;
-          //Car Movement
-          car.position.x = this.props.data.locationData.carLoc.x - OFFSET;
-          car.position.z = this.props.data.locationData.carLoc.y - OFFSET;
-          car.rotation.y = this.props.data.locationData.carLoc.heading;
+      objLoader.load(
+        "./assets/trex.obj",
+        function (object) {
+          trex = object;
+          console.log(object);
+          object.traverse(function(child){
+            if (child instanceof THREE.Mesh) {
+              child.material=new THREE.MeshBasicMaterial({color: "green"});
+            }
+          });
+          //object.material.color.setHex( 0x0000ff );
+          //object.material.color.set(0,1,0);
+          object.scale.set(2, 2, 2);
+          object.traverse(function (child) {
+            if (child instanceof THREE.Mesh)
+            child.material.color.setHex(0xff0000);
+          });
+          object.position.x = 10;
+          object.position.y = 20;
+          object.position.z = 10;
+          scene.add(object);
+        },
+        undefined,
+        function (err) {
+          console.log(err);
         }
+      );
+
+
+      /*
+      var mtlLoader = new MTLLoader();
+      mtlLoader.load("./assets/trex.mtl", function (materials) {
+      materials.preload();
+      var objLoader = new OBJLoader();
+
+      objLoader.setMaterials(materials);
+      objLoader.load(
+      "./assets/trex.obj",
+      function (object) {
+      trex = object;
+      console.log(object);
+      //object.material.color.set(0,1,0);
+      object.scale.set(2, 2, 2);
+      object.traverse(function (child) {
+      if (child instanceof THREE.Mesh)
+      child.material.color.setHex(0xff0000);
+    });
+    object.position.x = 10;
+    object.position.y = 20;
+    object.position.z = 10;
+    scene.add(object);
+  },
+  undefined,
+  function (err) {
+  console.log(err);
+}
+);
+});
+*/
+
+// var car;
+//Car 1
+var objLoader = new OBJLoader();
+
+objLoader.load(
+  "./assets/vehicle.obj",
+  function (object) {
+    car = object;
+
+    object.traverse(function(child){
+      if (child instanceof THREE.Mesh) {
+        child.material=new THREE.MeshBasicMaterial({color: "blue"});
       }
-
-
-      // updateObjs()
-
-      // function updateObjs() {
-      //   setInterval(function () {
-      //     fetch("http://127.0.0.1:5000/park-state")
-      //     .then((res) => res.json())
-      //     .then((result) => {
-      //       var data = result;
-      //       //Dinosaur Movement
-      //       if (data) {
-      //         trex.position.x = data.locationData.dinoLoc.x - OFFSET;
-      //         trex.position.z = data.locationData.dinoLoc.y - OFFSET;
-      //         trex.rotation.y = data.locationData.dinoLoc.heading;
-      //         //Car Movement
-      //         car.position.x = data.locationData.carLoc.x - OFFSET;
-      //         car.position.z = data.locationData.carLoc.y - OFFSET;
-      //         car.rotation.y = data.locationData.carLoc.heading;
-      //       }
-      //     });
-      //   }, 500);
-      // }
-
-      firstCall=false;
-    }
-
-
-    console.log("dashboard props", this.props);
-    return (
-      <div className="container">
-      <div className="row">
-      <div className="col-6">
-      <div className="widget">
-      <Map data={this.props.data}></Map>
-      </div>
-      </div>
-      <div className="col-3">
-      <div className="widget">
-      <ClientList
-      title={"Touring"}
-      data={this.props.data.clientData.clients}
-      ></ClientList>
-      </div>
-      </div>
-      <div className="col-3">
-      <div className="widget">
-      <ClientList
-      title={"Queued"}
-      data={this.props.data.clientData.clients}
-      ></ClientList>
-      </div>
-      </div>
-      </div>
-      <div className="row">
-      <div className="col-6">
-      <div id="dronecamera">
-      <DroneCamera
-      camID="3"
-      cam={this.props.data.camData}
-      scene={this.sceney}
-      location={this.props.data.locationData}
-      ></DroneCamera>
-      </div>
-      </div>
-      <div className="col-6">
-      <Camera
-      camID="0"
-      scene={this.sceney}
-      location={this.props.data.locationData}
-      ></Camera>
-      </div>
-      </div>
-
-      <div className="row"></div>
-      </div>
-    );
+    });
+    object.scale.set(5, 5, 5);
+    object.position.x = data.locationData.carLoc.x;
+    object.position.y = 5;
+    object.position.z = data.locationData.carLoc.y;
+    scene.add(object);
+  },
+  undefined,
+  function (err) {
+    console.log(err);
   }
+);
+
+//Update Dinosaurs Location
+
+// setTimeout(updateObjs, 5000);
+function updateStuff() {
+  if (this.props.data && trex) {
+    console.log('trex', trex)
+    trex.position.x = this.props.data.locationData.dinoLoc.x - OFFSET;
+    trex.position.z = this.props.data.locationData.dinoLoc.y - OFFSET;
+    trex.rotation.y = this.props.data.locationData.dinoLoc.heading;
+    //Car Movement
+    car.position.x = this.props.data.locationData.carLoc.x - OFFSET;
+    car.position.z = this.props.data.locationData.carLoc.y - OFFSET;
+    car.rotation.y = this.props.data.locationData.carLoc.heading;
+  }
+}
+
+
+// updateObjs()
+
+// function updateObjs() {
+//   setInterval(function () {
+//     fetch("http://127.0.0.1:5000/park-state")
+//     .then((res) => res.json())
+//     .then((result) => {
+//       var data = result;
+//       //Dinosaur Movement
+//       if (data) {
+//         trex.position.x = data.locationData.dinoLoc.x - OFFSET;
+//         trex.position.z = data.locationData.dinoLoc.y - OFFSET;
+//         trex.rotation.y = data.locationData.dinoLoc.heading;
+//         //Car Movement
+//         car.position.x = data.locationData.carLoc.x - OFFSET;
+//         car.position.z = data.locationData.carLoc.y - OFFSET;
+//         car.rotation.y = data.locationData.carLoc.heading;
+//       }
+//     });
+//   }, 500);
+// }
+
+firstCall=false;
+}
+
+
+console.log("dashboard props", this.props);
+return (
+  <div className="container">
+  <div className="row">
+  <div className="col-6">
+  <div className="widget">
+  <Map data={this.props.data}></Map>
+  </div>
+  </div>
+  <div className="col-3">
+  <div className="widget">
+  <ClientList
+  title={"Touring"}
+  data={this.props.data.clientData.clients}
+  ></ClientList>
+  </div>
+  </div>
+  <div className="col-3">
+  <div className="widget">
+  <ClientList
+  title={"Queued"}
+  data={this.props.data.clientData.clients}
+  ></ClientList>
+  </div>
+  </div>
+  </div>
+  <div className="row">
+  <div className="col-6">
+  <div id="dronecamera">
+  <DroneCamera
+  camID="3"
+  cam={this.props.data.camData}
+  scene={this.sceney}
+  location={this.props.data.locationData}
+  ></DroneCamera>
+  </div>
+  </div>
+  <div className="col-6">
+  <Camera
+  camID="0"
+  scene={this.sceney}
+  location={this.props.data.locationData}
+  ></Camera>
+  </div>
+  </div>
+
+  <div className="row"></div>
+  </div>
+);
+}
 }
 
 export default Dashboard;
