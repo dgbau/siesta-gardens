@@ -76,10 +76,12 @@ class Simulator:
                 x_car_step = self._car_step_size*((x_car_dest- self._x_car)/d_car)
                 y_car_step = self._car_step_size*((y_car_dest- self._y_car)/d_car)
                 self._reached_dest_car = False
-            if (self._x_car == x_car_dest and self._y_car == y_car_dest) or np.arctan((y_car_dest- self._y_car)/(x_car_dest- self._x_car)) != self._rad_car:
-                self._reached_dest_car = True
+            # if (self._x_car == x_car_dest and self._y_car == y_car_dest) or np.arctan((y_car_dest- self._y_car)/(x_car_dest- self._x_car)) != self._rad_car:
+            #     self._reached_dest_car = True
             print( str(self._x_car) + " is the location of the car in x")
             print( str(self._y_car) + " is the location of the car in y")
+            if(np.sqrt((y_car_dest- self._y_car)**2+(x_car_dest-self._x_car)**2)<np.sqrt((x_car_step)**2+(y_car_step)**2)):
+                self._reached_dest_car = True
+                continue
             self._x_car += x_car_step
             self._y_car += y_car_step
-
