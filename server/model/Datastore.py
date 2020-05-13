@@ -14,6 +14,7 @@ a nw unique_id. Each visitor has the following data saved:
 note that the state keeps track of the location of the visitor and can be one
 of the follwing: "waiting","inVehicle","viewing"
 '''
+
 def storeGuest(first_name, last_name, age, address, emergency_contact):
     unique_id = int(np.random.random()*1000000000)
     while unique_id in dictionary:
@@ -44,3 +45,33 @@ def updateGuest(unique_id, new_status, new_location):
     dictionary[unique_id][-2] = new_status
     dictionary[unique_id][-1] = new_location
     return True
+
+
+def update_all_guests(old_status, old_location, new_status, new_location):
+    for guest in dictionary:
+        if guest[-2] == old_status:
+            guest[-2] = new_status
+        if guest[-1] == old_location:
+            guest[-1] = new_location
+
+def waiting_guests():
+    count = 0
+    for guest in dictionary:
+        if guest[-2] == "queued" and guest[-1] == "ticketed" :
+            count += 1
+
+    return count
+
+def onboard_guests():
+    wg = waiting_guests()
+    num_onboard = 10
+    if wg < 10:
+        num_onboard = wg
+    for guest in dictionary:
+        if guest[-2] == "queued" and guest[-1] == "ticketed":
+            guest[-2] = "touring"
+            guest[-1] = "riding"
+            num_onboard -= 1
+        if num_onboard == 0:
+            return
+    return
