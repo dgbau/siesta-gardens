@@ -5,19 +5,11 @@ import threading
 from .Simulator import Simulator
 
 
-def print_stuff():
-    while True:
-        print("helo")
-
-
 simulator = Simulator()
 tr = threading.Thread(target=simulator.start)
-#tr2 = threading.Thread(target=print_stuff)
 tr.start()
-#tr2.start()
-#tr.join()
-#simulator.start()
-
+people_thread = threading.Thread(target=simulator.make_people())
+people_thread.start()
 
 def dino_loc():
     return [simulator.get_x_dino(), simulator.get_y_dino()]

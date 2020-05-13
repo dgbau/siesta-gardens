@@ -1,6 +1,9 @@
 import time
 import numpy as np
-
+import random
+from . import Datastore
+from faker import Faker
+fake = Faker()
 
 class Simulator:
 
@@ -37,6 +40,24 @@ class Simulator:
 
     def get_y_car(self):
         return self._y_car
+
+
+
+    def get_person(self):
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        middle_name = fake.middle_name()
+        age = random.randint(1, 120)
+        address = str(random.randint(1, 1200)) + fake.first_name() + " road"
+        em_cont = fake.name()
+        Datastore.storeGuest(first_name, middle_name, last_name, age, address, em_cont)
+
+    def make_people(self):
+        time.sleep(45)
+        people_count = 5
+        for i in range(people_count):
+            self.get_person()
+
 
     def start(self):
         x_dino_step = 0
