@@ -1,4 +1,3 @@
-from .controllers.py import controllers.py
 import numpy as np
 import time
 """ The vehicle class will control the movement and output abilities of the
@@ -13,48 +12,50 @@ class Vehicle:
     _acceleration = 0
     _passenger_count = 0
     _car_loc = 0
+    simulator = None
+
+    def __init__(self, sim):
+        self.simulator = sim
 
     def autoStop(self):
-        x_car = simulator.get_x_car()
-        y_car = simulator.get_y_car()
-        x_dino = simulator.get_x_dino()
-        y_dino = simulator.get_y_dino()
         cycle_number = -1
         while(True):
             time.sleep(1)
+            x_car = self.simulator.get_x_car()
+            y_car = self.simulator.get_y_car()
+            x_dino = self.simulator.get_x_dino()
+            y_dino = self.simulator.get_y_dino()
             dist = np.sqrt((x_car-x_dino)**2+(y_car-y_dino)**2)
-            if simulator.get_cycle_number()==cycle_number:
+            if self.simulator.get_cycle_number() == cycle_number:
                 continue
-            if x_car == 2100 and dist<500:
-                simulator.stop_car
+            if x_car == 2100 and dist < 500:
+                self.simulator.stop_car()
                 # TODO: Let people out
-                time.sleep(10)
+                time.sleep(20)
                 # TODO: people come back to the car
-                simulator.start_car
-                cycle_number = simulator.get_cycle_number()
-            elif y_car == 3950 and dist<1900/2:
-                simulator.stop_car
+                self.simulator.start_car()
+                cycle_number = self.simulator.get_cycle_number()
+            elif y_car == 3950 and dist < 1900/2:
+                self.simulator.stop_car()
                 # TODO: Let people out
-                time.sleep(10)
+                time.sleep(20)
                 # TODO: people come back to the car
-                simulator.start_car
-                cycle_number = simulator.get_cycle_number()
+                self.simulator.start_car()
+                cycle_number = self.simulator.get_cycle_number()
             elif x_car == 3100 and y_car>(2050+1900/2) and y_dino>(2050+1900/2):
-                simulator.stop_car
+                self.simulator.stop_car()
                 # TODO: Let people out
-                time.sleep(10)
+                time.sleep(20)
                 # TODO: people come back to the car
-                simulator.start_car
-                cycle_number = simulator.get_cycle_number()
+                self.simulator.start_car()
+                cycle_number = self.simulator.get_cycle_number()
             elif x_car == 3100 and y_car>2050:
-                simulator.stop_car
+                self.simulator.stop_car()
                 # TODO: Let people out
-                time.sleep(10)
+                time.sleep(20)
                 # TODO: people come back to the car
-                simulator.start_car
-                cycle_number = simulator.get_cycle_number()
-
-
+                self.simulator.start_car()
+                cycle_number = self.simulator.get_cycle_number()
 
     def lock_unlock_doors(self, lock):
         self._door_lock = lock

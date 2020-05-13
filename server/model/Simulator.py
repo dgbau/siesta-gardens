@@ -43,6 +43,7 @@ class Simulator:
 
     _cycle_number = 0
     _stop_car = False
+
     def stop_car(self):
         self._stop_car = True
 
@@ -55,11 +56,10 @@ class Simulator:
     def get_person(self):
         first_name = fake.first_name()
         last_name = fake.last_name()
-        middle_name = fake.middle_name()
         age = random.randint(1, 120)
         address = str(random.randint(1, 1200)) + fake.first_name() + " road"
         em_cont = fake.name()
-        Datastore.storeGuest(first_name, middle_name, last_name, age, address, em_cont)
+        Datastore.storeGuest(first_name, last_name, age, address, em_cont)
 
     def make_people(self):
         time.sleep(45)
@@ -94,18 +94,18 @@ class Simulator:
                 self._x_dino = x_dino_dest
                 self._y_dino = y_dino_dest
             else:
-                print(str(self._x_dino) + " is the location of the dino in x")
-                print(str(self._y_dino) + " is the location of the dino in y")
                 self._x_dino += x_dino_step
                 self._y_dino += y_dino_step
-            ###### car
+            # car
             if not self._stop_car:
                 if self._reached_dest_car:
                     if self._dest_index_car >= len(self._x_road) - 1:
                         self._dest_index_car = 0
-                        self._cycle_number += 1
+                       #  self._cycle_number += 1
                     else:
                         self._dest_index_car += 1
+                    if self._dest_index_car == 1:
+                        self._cycle_number += 1
                     x_car_dest = self._x_road[self._dest_index_car]
                     y_car_dest = self._y_road[self._dest_index_car]
                     d_car = np.sqrt((y_car_dest- self._y_car)**2+(x_car_dest-self._x_car)**2)
@@ -117,7 +117,5 @@ class Simulator:
                     self._x_car = x_car_dest
                     self._y_car = y_car_dest
                     continue
-                print( str(self._x_car) + " is the location of the car in x")
-                print( str(self._y_car) + " is the location of the car in y")
                 self._x_car += x_car_step
                 self._y_car += y_car_step
