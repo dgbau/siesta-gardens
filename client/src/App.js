@@ -30,7 +30,7 @@ class App extends Component{
 
 
           }),
-      1000
+      500
     );
     function distance( x1, y1, x2, y2 ) {
 
