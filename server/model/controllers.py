@@ -16,11 +16,11 @@ vehicle_thread = threading.Thread(target=vehicle.autoStop)
 vehicle_thread.start()
 
 def dino_loc():
-    return [simulator.get_x_dino(), simulator.get_y_dino()]
+    return [simulator.get_x_dino(), simulator.get_y_dino(), simulator.get_rad_dino()]
 
 
 def car_loc():
-    return [simulator.get_x_car(), simulator.get_y_car()]
+    return [simulator.get_x_car(), simulator.get_y_car(), simulator.get_rad_car()]
 
 
 def get_state():

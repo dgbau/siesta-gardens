@@ -44,12 +44,12 @@ def get_state():
         "dinoLoc": {
             "x": dinoloc[0],
             "y": dinoloc[1],
-            "heading": 0
+            "heading": dinoloc[2]
         },
         "carLoc": {
             "x": carloc[0],
             "y": carloc[1],
-            "heading": 0
+            "heading": carloc[2]
         },
     },
     "perimeterData": {

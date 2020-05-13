@@ -1,6 +1,7 @@
 import time
 import numpy as np
 import random
+import math
 from . import Datastore
 from faker import Faker
 fake = Faker()
@@ -25,6 +26,9 @@ class Simulator:
     def get_y_dino(self):
         return self._y_dino
 
+    def get_rad_dino(self):
+        return self._rad_dino-np.pi/2
+
     _x_road = [3100,2600,2100,2100,3100]
     _y_road = [1550,1550,2050,3950,3950]
 
@@ -40,6 +44,9 @@ class Simulator:
 
     def get_y_car(self):
         return self._y_car
+
+    def get_rad_car(self):
+        return self._rad_car-np.pi/2
 
     _cycle_number = 0
     _stop_car = False
@@ -87,12 +94,8 @@ class Simulator:
                 d_dino = np.sqrt((y_dino_dest- self._y_dino)**2+(x_dino_dest-self._x_dino)**2)
                 x_dino_step = self._dino_step_size*((x_dino_dest- self._x_dino)/d_dino)
                 y_dino_step = self._dino_step_size*((y_dino_dest- self._y_dino)/d_dino)
-                if x_dino_dest = self._x_dino and y_dino_dest>=self._y_dino:
-                    self._rad_dino = np.pi
-                elif x_dino_dest = self._x_dino and y_dino_dest<=self._y_dino:
-                    self._rad_dino = 0
-                else:
-                    self._rad_dino = np.arctan((y_dino_dest-self._y_dino)/(x_dino_dest- self._x_dino)) + (np.pi/2)
+                self._rad_dino = math.atan2((x_dino_dest- self._x_dino),(y_dino_dest-self._y_dino)) + (np.pi/2)
+
                 self._reached_dest_dino = False
             if (np.sqrt((y_dino_dest - self._y_dino) ** 2 + (x_dino_dest - self._x_dino) ** 2) < np.sqrt(
                     (x_dino_step) ** 2 + (y_dino_step) ** 2)):
@@ -117,12 +120,8 @@ class Simulator:
                     d_car = np.sqrt((y_car_dest- self._y_car)**2+(x_car_dest-self._x_car)**2)
                     x_car_step = self._car_step_size*((x_car_dest- self._x_car)/d_car)
                     y_car_step = self._car_step_size*((y_car_dest- self._y_car)/d_car)
-                    if x_car_dest = self._x_car and y_car_dest>=self._y_car:
-                        self._rad_car = np.pi
-                    elif x_car_dest = self._x_car and y_car_dest<=self._y_car:
-                        self._rad_car = 0
-                    else:
-                        self._rad_car = np.arctan((y_car_dest-self._y_car)/(x_car_dest- self._x_car)) + (np.pi/2)
+                    self._rad_car = math.atan2((x_dino_dest- self._x_car),(y_dino_dest-self._y_car)) + (np.pi/2)
+
                     self._reached_dest_car = False
                 if (np.sqrt((y_car_dest - self._y_car) ** 2 + (x_car_dest - self._x_car) ** 2) < np.sqrt((x_car_step) ** 2 + (y_car_step) ** 2)):
                     self._reached_dest_car = True
