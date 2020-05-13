@@ -8,7 +8,7 @@ function ClientList(props) {
     <div className="clientlist">
       <h3>{props.title}</h3>
       <ul>
-        {props.data.map(({ firstName, lastName }, idx) => {
+        {props.data.filter(x => x.status === props.title.toLowerCase()).map(({ firstName, lastName }, idx) => {
           // console.log(idx);
           return (
             <li key={idx}>

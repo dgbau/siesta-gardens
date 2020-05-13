@@ -50,7 +50,7 @@ class App extends Component{
       this.state.data ?
       <div className="container-fluid">
       <MainNav></MainNav>
-      <Dashboard data={this.state.data} zdata={this.state}></Dashboard>
+      <Dashboard data={this.state.data}></Dashboard>
       </div> : <div>Loading...</div>
     );
   }
