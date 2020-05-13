@@ -18,7 +18,8 @@ def storeGuest(first_name, middle_name, last_name, age, address, emergency_conta
     unique_id = int(np.random.random()*1000000000)
     while unique_id in dictionary:
         unique_id = int(np.random.random()*1000000000)
-    dictionary[unique_id] = [first_name, middle_name, last_name, age, address, emergency_contact, visitor_state.waiting]
+    dictionary[unique_id] = [first_name, middle_name, last_name, age, address,
+                             emergency_contact, status_options[0], location_options[2]]
     with open ("data.csv","a")as file:
         writer = csv.writer(file)
         writer.writerow([unique_id]+dictionary[unique_id])
@@ -35,8 +36,11 @@ def getGuest(unique_id):
 This function updates the status of the visitor
 returns True is successful and False if not successful
 '''
-def updateGuest(unique_id,new_state):
+
+
+def updateGuest(unique_id, new_status, new_location):
     if unique_id not in dictionary:
         return False
-    dictionary[unique_id][-1] = new_state
+    dictionary[unique_id][-2] = new_status
+    dictionary[unique_id][-1] = new_location
     return True
