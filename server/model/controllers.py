@@ -20,8 +20,6 @@ tr.start()
 
 
 def dino_loc():
-    print(str(simulator.get_x_dino()) + " is the location of the dino in x")
-    print(str(simulator.get_y_dino()) + " is the location of the dino in y")
     return [simulator.get_x_dino(), simulator.get_y_dino()]
 
 
