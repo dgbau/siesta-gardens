@@ -94,7 +94,7 @@ class Simulator:
                 self._x_dino += x_dino_step
                 self._y_dino += y_dino_step
             ###### car
-            if not _stop_car:
+            if not self._stop_car:
                 if self._reached_dest_car:
                     if self._dest_index_car >= len(self._x_road) - 1:
                         self._dest_index_car = 0

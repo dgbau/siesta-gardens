@@ -8,7 +8,7 @@ from .Simulator import Simulator
 simulator = Simulator()
 tr = threading.Thread(target=simulator.start)
 tr.start()
-people_thread = threading.Thread(target=simulator.make_people())
+people_thread = threading.Thread(target=simulator.make_people)
 people_thread.start()
 
 def dino_loc():

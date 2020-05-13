@@ -3,9 +3,9 @@ The Data store archives guest data from the guest registration forms
 and associates that data with their personal unique identifier.
 '''
 import numpy as np
-from enum import Enum
 import csv
-visitor_state = Enum("waiting","inVehicle","viewing")
+status_options = ["queued", "touring"]
+location_options = ["exploring", "riding", "ticketed", "arrived"]
 dictionary = {}
 '''
 This function stores guest data when they register through the kiosk and issues
