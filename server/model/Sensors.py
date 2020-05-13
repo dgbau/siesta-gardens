@@ -7,7 +7,11 @@ class Sensors:
     _fence_sensor = [0, 0, 0, 0]
 
     def trip_triggered(self):
-        return self._trip_wires
+        for i in self._fence_sensor:
+            if i != 0:
+                return True
+
+        return False
 
     def fence_triggered(self):
         return self._fence_sensor

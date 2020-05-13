@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, disconnect, emit
 from flask_cors import CORS, cross_origin
 from server.app import helpers
 from server.model.Client import Client
-from server.model.controllers import dino_loc, car_loc
+from server.model.controllers import dino_loc, car_loc, world_state
 
 c = Client("david", "bau", 1)
 print(c)
@@ -31,6 +31,7 @@ def get_data():
 def get_state():
     dinoloc = dino_loc()
     carloc = car_loc()
+    state = world_state()
     return jsonify({
     "camData": {
         "x":0,

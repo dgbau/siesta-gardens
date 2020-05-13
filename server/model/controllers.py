@@ -1,6 +1,10 @@
 import math, random
 import server.model.Main
 import threading
+from . import Emergency
+from . import Datastore
+
+from flask import Flask, Response, jsonify
 
 from .Simulator import Simulator
 from .Vehicle import Vehicle
@@ -23,5 +27,30 @@ def car_loc():
     return [simulator.get_x_car(), simulator.get_y_car(), simulator.get_rad_car()]
 
 
-def get_state():
-    return 'the whole state, calling stuff in the main or the simulatior'
+def make_person(guest):
+    return {
+        "firstName": Datastore.dictionary[guest][0],
+        "lastName": Datastore.dictionary[guest][1],
+        "id": guest,
+        "location": Datastore.dictionary[guest][-1]
+    }
+
+def world_state():
+    fence_state = Emergency.fence_integrity()
+    client_list = []
+    trip_wire = Emergency.sensor_triggered()
+    for guest in Datastore.dictionary:
+        client_list.append(make_person(guest))
+    return jsonify({
+    "perimeterData": {
+        "sections": fence_state,
+        "tripWireAlert": trip_wire # add method
+    },
+        #first name, last name, id, location
+    "clientData": {
+        "clients": client_list
+    }
+    })
+
+
+
