@@ -5,6 +5,7 @@ from . import Datastore
 from faker import Faker
 fake = Faker()
 
+
 class Simulator:
 
     _buffer = 20
@@ -66,6 +67,12 @@ class Simulator:
         people_count = 5
         for i in range(people_count):
             self.get_person()
+
+    # TODO CHECK DINO HIT WALL
+    # TODO GET PEOPLE IN CAR ACCORDING TO SAD
+    # TODO TRIP WIRE, DISABLE DINO
+    def dino_angry(self):
+        # TODO MAKE DINO RUN AT CAR FULL SPEED
 
 
     def start(self):

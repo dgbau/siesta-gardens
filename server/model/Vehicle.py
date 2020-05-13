@@ -1,5 +1,7 @@
 import numpy as np
 import time
+from . import Datastore
+
 """ The vehicle class will control the movement and output abilities of the
     vehicle that will transport individuals to and from the exhibit """
 
@@ -19,8 +21,13 @@ class Vehicle:
 
     def autoStop(self):
         cycle_number = -1
+        new_cycle = True
         while(True):
             time.sleep(1)
+            if self.simulator.get_cycle_number() != cycle_number and new_cycle == True:
+                new_cycle = False
+                Datastore.update_all_guests("touring", "riding", "queued", "arrived")
+                Datastore.onboard_guests()
             x_car = self.simulator.get_x_car()
             y_car = self.simulator.get_y_car()
             x_dino = self.simulator.get_x_dino()
@@ -30,32 +37,39 @@ class Vehicle:
                 continue
             if x_car == 2100 and dist < 500:
                 self.simulator.stop_car()
-                # TODO: Let people out
+                Datastore.update_all_guests("touring", "riding", "touring", "exploring")
                 time.sleep(20)
-                # TODO: people come back to the car
+                Datastore.update_all_guests("touring", "exploring", "touring", "riding")
                 self.simulator.start_car()
                 cycle_number = self.simulator.get_cycle_number()
+                new_cycle = True
             elif y_car == 3950 and dist < 1900/2:
                 self.simulator.stop_car()
-                # TODO: Let people out
+                Datastore.update_all_guests("touring", "riding", "touring", "exploring")
                 time.sleep(20)
-                # TODO: people come back to the car
+                Datastore.update_all_guests("touring", "exploring", "touring", "riding")
                 self.simulator.start_car()
                 cycle_number = self.simulator.get_cycle_number()
+                new_cycle = True
+
             elif x_car == 3100 and y_car>(2050+1900/2) and y_dino>(2050+1900/2):
                 self.simulator.stop_car()
-                # TODO: Let people out
+                Datastore.update_all_guests("touring", "riding", "touring", "exploring")
                 time.sleep(20)
-                # TODO: people come back to the car
+                Datastore.update_all_guests("touring", "exploring", "touring", "riding")
                 self.simulator.start_car()
+                new_cycle = True
+
                 cycle_number = self.simulator.get_cycle_number()
             elif x_car == 3100 and y_car>2050:
                 self.simulator.stop_car()
-                # TODO: Let people out
+                Datastore.update_all_guests("touring", "riding", "touring", "exploring")
                 time.sleep(20)
-                # TODO: people come back to the car
+                Datastore.update_all_guests("touring", "exploring", "touring", "riding")
                 self.simulator.start_car()
                 cycle_number = self.simulator.get_cycle_number()
+                new_cycle = True
+
 
     def lock_unlock_doors(self, lock):
         self._door_lock = lock
@@ -78,8 +92,11 @@ class Vehicle:
         # In while loop for speeding car up:
         if self._speed >= max_speed:
             return
-
+    # TODO assume that the passenger count becomes 0 when we dump passengaers
     def get_passenger_count(self):
+        for people in Datastore.dictionary:
+            if people[-1] == "riding":
+                self._passenger_count += 1
         return self._passenger_count
 
     def get_car_loc(self):
