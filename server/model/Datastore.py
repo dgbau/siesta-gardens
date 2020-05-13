@@ -49,15 +49,15 @@ def updateGuest(unique_id, new_status, new_location):
 
 def update_all_guests(old_status, old_location, new_status, new_location):
     for guest in dictionary:
-        if guest[-2] == old_status:
-            guest[-2] = new_status
-        if guest[-1] == old_location:
-            guest[-1] = new_location
+        if dictionary[guest][-2] == old_status:
+            dictionary[guest][-2] = new_status
+        if dictionary[guest][-1] == old_location:
+            dictionary[guest][-1] = new_location
 
 def waiting_guests():
     count = 0
     for guest in dictionary:
-        if guest[-2] == "queued" and guest[-1] == "ticketed" :
+        if dictionary[guest][-2] == "queued" and dictionary[guest][-1] == "ticketed" :
             count += 1
 
     return count
@@ -68,9 +68,9 @@ def onboard_guests():
     if wg < 10:
         num_onboard = wg
     for guest in dictionary:
-        if guest[-2] == "queued" and guest[-1] == "ticketed":
-            guest[-2] = "touring"
-            guest[-1] = "riding"
+        if dictionary[guest][-2] == "queued" and  dictionary[guest][-1] == "ticketed":
+            dictionary[guest][-2] = "touring"
+            dictionary[guest][-1] = "riding"
             num_onboard -= 1
         if num_onboard == 0:
             return

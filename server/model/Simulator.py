@@ -71,7 +71,7 @@ class Simulator:
     # TODO CHECK DINO HIT WALL
     # TODO GET PEOPLE IN CAR ACCORDING TO SAD
     # TODO TRIP WIRE, DISABLE DINO
-    def dino_angry(self):
+    # def dino_angry(self):
         # TODO MAKE DINO RUN AT CAR FULL SPEED
 
 
