@@ -16,11 +16,29 @@ var OFFSET = 3000;
 
 var firstCall=true;
 
+var trex;
+var car;
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidUpdate(){
+    if (this.props.data && trex) {
+      console.log('trex', trex)
+      trex.position.x = this.props.data.locationData.dinoLoc.x - OFFSET;
+      trex.position.z = this.props.data.locationData.dinoLoc.y - OFFSET;
+      trex.rotation.y = this.props.data.locationData.dinoLoc.heading;
+      //Car Movement
+      car.position.x = this.props.data.locationData.carLoc.x - OFFSET;
+      car.position.z = this.props.data.locationData.carLoc.y - OFFSET;
+      car.rotation.y = this.props.data.locationData.carLoc.heading;
+    }
+    // this.updateStuff()
+  }
+
+  cop
 
   render() {
 
@@ -192,9 +210,8 @@ class Dashboard extends Component {
         }
       );
 
-      var data = this.props.zdata.data;
-
-      var trex;
+      var data = this.props.data
+      // var trex;
 
       var mtlLoader = new MTLLoader();
       mtlLoader.load("./assets/trex.mtl", function (materials) {
@@ -223,7 +240,7 @@ class Dashboard extends Component {
         );
       });
 
-      var car;
+      // var car;
       //Car 1
       var mtlLoader = new MTLLoader();
       mtlLoader.load("./assets/trex.mtl", function (materials) {
@@ -250,33 +267,48 @@ class Dashboard extends Component {
 
       //Update Dinosaurs Location
 
-      setTimeout(updateObjs, 5000);
-
-      function updateObjs() {
-        setInterval(function () {
-          fetch("http://127.0.0.1:5000/park-state")
-          .then((res) => res.json())
-          .then((result) => {
-            var data = result;
-            //Dinosaur Movement
-            if (data) {
-              trex.position.x = data.locationData.dinoLoc.x - OFFSET;
-              trex.position.z = data.locationData.dinoLoc.y - OFFSET;
-              trex.rotation.y = data.locationData.dinoLoc.heading;
-              //Car Movement
-              car.position.x = data.locationData.carLoc.x - OFFSET;
-              car.position.z = data.locationData.carLoc.y - OFFSET;
-              car.rotation.y = data.locationData.carLoc.heading;
-            }
-          });
-        }, 500);
+      // setTimeout(updateObjs, 5000);
+      function updateStuff() {
+        if (this.props.data && trex) {
+          console.log('trex', trex)
+          trex.position.x = this.props.data.locationData.dinoLoc.x - OFFSET;
+          trex.position.z = this.props.data.locationData.dinoLoc.y - OFFSET;
+          trex.rotation.y = this.props.data.locationData.dinoLoc.heading;
+          //Car Movement
+          car.position.x = this.props.data.locationData.carLoc.x - OFFSET;
+          car.position.z = this.props.data.locationData.carLoc.y - OFFSET;
+          car.rotation.y = this.props.data.locationData.carLoc.heading;
+        }
       }
+      
+
+      // updateObjs()
+
+      // function updateObjs() {
+      //   setInterval(function () {
+      //     fetch("http://127.0.0.1:5000/park-state")
+      //     .then((res) => res.json())
+      //     .then((result) => {
+      //       var data = result;
+      //       //Dinosaur Movement
+      //       if (data) {
+      //         trex.position.x = data.locationData.dinoLoc.x - OFFSET;
+      //         trex.position.z = data.locationData.dinoLoc.y - OFFSET;
+      //         trex.rotation.y = data.locationData.dinoLoc.heading;
+      //         //Car Movement
+      //         car.position.x = data.locationData.carLoc.x - OFFSET;
+      //         car.position.z = data.locationData.carLoc.y - OFFSET;
+      //         car.rotation.y = data.locationData.carLoc.heading;
+      //       }
+      //     });
+      //   }, 500);
+      // }
 
       firstCall=false;
     }
 
 
-    console.log("dashboard props", this.props.data);
+    console.log("dashboard props", this.props);
     return (
       <div className="container">
       <div className="row">
