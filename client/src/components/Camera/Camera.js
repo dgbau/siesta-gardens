@@ -5,12 +5,15 @@ import * as THREE from "three";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
 
+var camera;
+var renderer;
+var sceney;
 
 class Camera extends Component {
 
   componentDidMount() {
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 50000 );
-    var renderer = new THREE.WebGLRenderer();
+    camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 50000 );
+    renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth/2.5, window.innerHeight/2.5 );
 
     window.addEventListener( 'resize', onWindowResize, false );
@@ -31,27 +34,29 @@ class Camera extends Component {
     var heading=0;
     var camID=this.props.camID;
     var data=this.props;
-    var sceney=this.props.scene;
-    var animate = function () {
-      requestAnimationFrame( animate );
-      //console.log(camera.position);
-      var camLoc=data.location.carLoc;
-      camera.position.x=camLoc.x;
-      camera.position.y=17;
-      camera.position.z=camLoc.y;
-      camera.lookAt(new THREE.Vector3(data.location.dinoLoc.x,10,data.location.dinoLoc.y));
-
-
-      renderer.render( sceney, camera );
-    };
-    animate();
+    sceney=this.props.scene;
+    this.animate();
   }
-render() {
 
-  return (
-    <div ref={ref => (this.mount = ref)} />
-  )
-}
+  animate = () => {
+    requestAnimationFrame( this.animate );
+    //console.log(camera.position);
+    var data=this.props;
+    var camLoc=data.location.carLoc;
+    camera.position.x=camLoc.x;
+    camera.position.y=17;
+    camera.position.z=camLoc.y;
+    camera.lookAt(new THREE.Vector3(data.location.dinoLoc.x,10,data.location.dinoLoc.y));
+
+    console.log("HERE");
+    renderer.render( sceney, camera );
+  }
+
+  render() {
+    return (
+      <div ref={ref => (this.mount = ref)} />
+    );
+  }
 
 }
 

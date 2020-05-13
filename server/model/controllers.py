@@ -15,7 +15,7 @@ tr = threading.Thread(target=simulator.start)
 #tr2 = threading.Thread(target=print_stuff)
 tr.start()
 #tr2.start()
-tr.join()
+#tr.join()
 #simulator.start()
 
 def dino_loc():
