@@ -10,7 +10,7 @@ import * as THREE from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader.js";
 
-var lift = 10;
+var lift = 3;
 var fenceHeight = 10;
 var OFFSET = 3000;
 
@@ -280,7 +280,7 @@ class Dashboard extends Component {
           car.rotation.y = this.props.data.locationData.carLoc.heading;
         }
       }
-      
+
 
       // updateObjs()
 

@@ -3,6 +3,7 @@ import server.model.Main
 import threading
 
 from .Simulator import Simulator
+from .Vehicle import Vehicle
 
 
 simulator = Simulator()
@@ -10,6 +11,9 @@ tr = threading.Thread(target=simulator.start)
 tr.start()
 people_thread = threading.Thread(target=simulator.make_people)
 people_thread.start()
+vehicle = Vehicle(simulator)
+vehicle_thread = threading.Thread(target=vehicle.autoStop)
+vehicle_thread.start()
 
 def dino_loc():
     return [simulator.get_x_dino(), simulator.get_y_dino()]

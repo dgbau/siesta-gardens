@@ -14,11 +14,11 @@ a nw unique_id. Each visitor has the following data saved:
 note that the state keeps track of the location of the visitor and can be one
 of the follwing: "waiting","inVehicle","viewing"
 '''
-def storeGuest(first_name, middle_name, last_name, age, address, emergency_contact):
+def storeGuest(first_name, last_name, age, address, emergency_contact):
     unique_id = int(np.random.random()*1000000000)
     while unique_id in dictionary:
         unique_id = int(np.random.random()*1000000000)
-    dictionary[unique_id] = [first_name, middle_name, last_name, age, address,
+    dictionary[unique_id] = [first_name, last_name, age, address,
                              emergency_contact, status_options[0], location_options[2]]
     with open ("data.csv","a")as file:
         writer = csv.writer(file)
