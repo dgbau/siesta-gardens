@@ -314,7 +314,7 @@ class Dashboard extends Component {
       <div className="row">
       <div className="col-6">
       <div className="widget">
-      <Map data={this.props.data.locationData}></Map>
+      <Map data={this.props.data}></Map>
       </div>
       </div>
       <div className="col-3">
