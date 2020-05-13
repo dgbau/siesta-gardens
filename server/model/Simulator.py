@@ -41,12 +41,17 @@ class Simulator:
     def get_y_car(self):
         return self._y_car
 
+    _cycle_number = 0
     _stop_car = False
     def stop_car(self):
         self._stop_car = True
 
     def start_car(self):
         self._stop_car = False
+
+    def get_cycle_number(self):
+        return self._cycle_number
+
     def get_person(self):
         first_name = fake.first_name()
         last_name = fake.last_name()
@@ -98,6 +103,7 @@ class Simulator:
                 if self._reached_dest_car:
                     if self._dest_index_car >= len(self._x_road) - 1:
                         self._dest_index_car = 0
+                        self._cycle_number += 1
                     else:
                         self._dest_index_car += 1
                     x_car_dest = self._x_road[self._dest_index_car]
