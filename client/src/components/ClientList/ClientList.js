@@ -6,13 +6,14 @@ import "./ClientList.scss";
 function ClientList(props) {
   return (
     <div className="clientlist">
-      <h3>{props.title}</h3>
+      <h4>{props.title}</h4>
       <ul>
-        {props.data.filter(x => x.status === props.title.toLowerCase()).map(({ firstName, lastName }, idx) => {
+        {props.data.filter(x => x.status === props.title.toLowerCase()).map(({ firstName, lastName, location }, idx) => {
           // console.log(idx);
           return (
             <li key={idx}>
-              {firstName} {lastName}
+              <div>{firstName} {lastName}</div>
+              <div className="subtitle">{location}</div>
             </li>
           );
         })}
