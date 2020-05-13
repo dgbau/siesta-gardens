@@ -36,8 +36,8 @@ class Simulator:
                 y_dino_dest = self._y_cage[0]+self._buffer+np.random.random()*( self._y_cage[1]- self._y_cage[0]- self._buffer*2)
                 self._rad_dino = np.arctan((y_dino_dest- self._y_dino)/(x_dino_dest- self._x_dino))
                 d = np.sqrt((y_dino_dest- self._y_dino)**2+(x_dino_dest-self._x_dino)**2)
-                x_dino_step = (x_dino_dest- self._x_dino)/d
-                y_dino_step = (y_dino_dest- self._y_dino)/d
+                x_dino_step = self._dino_step_size*((x_dino_dest- self._x_dino)/d)
+                y_dino_step = self._dino_step_size*((y_dino_dest- self._y_dino)/d)
                 self._reached_dest = False
                 ###### dino
             if (self._x_dino == x_dino_dest and self._y_dino == y_dino_dest) or np.arctan((y_dino_dest- self._y_dino)/(x_dino_dest- self._x_dino)) != self._rad_dino:
