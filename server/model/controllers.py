@@ -22,7 +22,7 @@ def dino_loc():
     return [simulator.get_x_dino(), simulator.get_y_dino()]
 
 def car_loc():
-    return [random.uniform(1500, 4500), random.uniform(1500, 4500)]
+    return [u, random.uniform(1500, 4500)]
 
 
 def get_state():
