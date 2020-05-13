@@ -11,7 +11,7 @@ class Simulator:
     _buffer = 20
     _x_cage = [2150,3050]
     _y_cage = [2100,3900]
-    _dino_step_size = 1
+    _dino_step_size = .3
     _car_step_size = 1
 
     _x_dino = _x_cage[0]+_buffer+np.random.random()*(_x_cage[1]-_x_cage[0]-_buffer*2)
