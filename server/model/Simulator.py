@@ -78,7 +78,7 @@ class Simulator:
             people_count = 5
             for i in range(people_count):
                 self.get_person()
-            time.sleep(20)
+            time.sleep(40)
 
 
 
@@ -92,36 +92,40 @@ class Simulator:
         y_car_step = 0
         x_car_dest = 0
         y_car_dest = 0
-
+        first = True
         while(True):
             time.sleep(.01)
-            if self._crazy_dino:
-                x_dino_dest = self._x_car
-                y_dino_dest = self._y_car
-                d_dino = np.sqrt((y_dino_dest- self._y_dino)**2+(x_dino_dest-self._x_dino)**2)
-                x_dino_step = self._dino_step_size*((x_dino_dest- self._x_dino)/d_dino)
-                y_dino_step = self._dino_step_size*((y_dino_dest- self._y_dino)/d_dino)
-                self._rad_dino = math.atan2((x_dino_dest- self._x_dino),(y_dino_dest-self._y_dino)) + (np.pi/2)
-                self._x_dino += x_dino_step
-                self._y_dino += y_dino_step
-            else:
-                if self._reached_dest_dino:
-                    x_dino_dest = self._x_cage[0]+self._buffer+np.random.random()*( self._x_cage[1]- self._x_cage[0]-self._buffer*2)
-                    y_dino_dest = self._y_cage[0]+self._buffer+np.random.random()*( self._y_cage[1]- self._y_cage[0]- self._buffer*2)
-                    d_dino = np.sqrt((y_dino_dest- self._y_dino)**2+(x_dino_dest-self._x_dino)**2)
-                    x_dino_step = self._dino_step_size*((x_dino_dest- self._x_dino)/d_dino)
-                    y_dino_step = self._dino_step_size*((y_dino_dest- self._y_dino)/d_dino)
-                    self._rad_dino = math.atan2((x_dino_dest- self._x_dino),(y_dino_dest-self._y_dino)) + (np.pi/2)
-
-                    self._reached_dest_dino = False
-                if (np.sqrt((y_dino_dest - self._y_dino) ** 2 + (x_dino_dest - self._x_dino) ** 2) < np.sqrt(
-                        (x_dino_step) ** 2 + (y_dino_step) ** 2)):
-                    self._reached_dest_dino = True
-                    self._x_dino = x_dino_dest
-                    self._y_dino = y_dino_dest
-                else:
+            if not self._dino_disabled:
+                if self._crazy_dino:
+                    self._dino_step_size=1.2
+                    if first:
+                        first = False
+                        x_dino_dest = self._x_car
+                        y_dino_dest = self._y_car
+                        d_dino = np.sqrt((y_dino_dest- self._y_dino)**2+(x_dino_dest-self._x_dino)**2)
+                        x_dino_step = self._dino_step_size*((x_dino_dest- self._x_dino)/d_dino)
+                        y_dino_step = self._dino_step_size*((y_dino_dest- self._y_dino)/d_dino)
+                        self._rad_dino = math.atan2((x_dino_dest- self._x_dino),(y_dino_dest-self._y_dino)) + (np.pi/2)
                     self._x_dino += x_dino_step
                     self._y_dino += y_dino_step
+                else:
+                    if self._reached_dest_dino:
+                        x_dino_dest = self._x_cage[0]+self._buffer+np.random.random()*( self._x_cage[1]- self._x_cage[0]-self._buffer*2)
+                        y_dino_dest = self._y_cage[0]+self._buffer+np.random.random()*( self._y_cage[1]- self._y_cage[0]- self._buffer*2)
+                        d_dino = np.sqrt((y_dino_dest- self._y_dino)**2+(x_dino_dest-self._x_dino)**2)
+                        x_dino_step = self._dino_step_size*((x_dino_dest- self._x_dino)/d_dino)
+                        y_dino_step = self._dino_step_size*((y_dino_dest- self._y_dino)/d_dino)
+                        self._rad_dino = math.atan2((x_dino_dest- self._x_dino),(y_dino_dest-self._y_dino)) + (np.pi/2)
+
+                        self._reached_dest_dino = False
+                    if (np.sqrt((y_dino_dest - self._y_dino) ** 2 + (x_dino_dest - self._x_dino) ** 2) < np.sqrt(
+                            (x_dino_step) ** 2 + (y_dino_step) ** 2)):
+                        self._reached_dest_dino = True
+                        self._x_dino = x_dino_dest
+                        self._y_dino = y_dino_dest
+                    else:
+                        self._x_dino += x_dino_step
+                        self._y_dino += y_dino_step
             # car
             if not self._stop_car:
                 if self._reached_dest_car:

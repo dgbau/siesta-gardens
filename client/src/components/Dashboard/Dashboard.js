@@ -289,7 +289,7 @@ class Dashboard extends Component {
 
           object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
-              child.material = new THREE.MeshBasicMaterial({ color: "blue" });
+              child.material = new THREE.MeshBasicMaterial({ color: "#00f7ff" });
             }
           });
           object.scale.set(5, 5, 5);
@@ -351,7 +351,7 @@ class Dashboard extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col-4">
-           
+
             <div className="widget">
             <h5>Park Map</h5>
               <Map data={this.props.data}></Map>

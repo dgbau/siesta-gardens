@@ -1,11 +1,30 @@
 from .Fence import Fence
 from .Sensors import Sensors
 from . import controllers
+import time
+from . import Datastore
+
 
 siren_towers = [0, 0, 0, 0, 0, 0, 0, 0]
 fence = Fence()
 sensors = Sensors()
 dinosaurEnable = True
+fenceBreached = False
+
+
+def fence_breach():
+    global fenceBreached
+    fenceBreached = True
+    x_car = controllers.simulator.get_x_car()
+    y_car = controllers.simulator.get_y_car()
+    if x_car<=2150:
+        fence.update_fence([0,0,0,1])
+    elif x_car>=3050:
+        fence.update_fence([0,1,0,0])
+    elif y_car<=2100:
+        fence.update_fence([1,0,0,0])
+    elif y_car>=3900:
+        fence.update_fence([0,0,1,0])
 
 def detect_emergency():
     cycle_number = -1
@@ -17,7 +36,7 @@ def detect_emergency():
             controllers.simulator.stop_car()
             Datastore.update_all_guests("touring", "riding", "queued", "arrived")
             car_stopped = True
-        x_car = controllers.imulator.get_x_car()
+        x_car = controllers.simulator.get_x_car()
         y_car = controllers.simulator.get_y_car()
         x_dino = controllers.simulator.get_x_dino()
         y_dino = controllers.simulator.get_y_dino()
@@ -34,6 +53,10 @@ def detect_emergency():
             elif y_dino>=3900:
                 fence.update_fence([0,0,2,0])
         if car_stopped and dino_stopped:
+            controllers.vehicle_thread.stop()
+            controllers.people_thread.stop()
+            controllers.tr.stop()
+            sys.exit()
             break
         if controllers.simulator.get_cycle_number() != cycle_number:
             cycle_number = controllers.simulator.get_cycle_number()

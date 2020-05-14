@@ -1,6 +1,7 @@
 import numpy as np
 import time
 from . import Datastore
+from . import Emergency
 
 """ The vehicle class will control the movement and output abilities of the
     vehicle that will transport individuals to and from the exhibit """
@@ -23,6 +24,8 @@ class Vehicle:
         cycle_number = -1
         new_cycle = True
         while(True):
+            if Emergency.fenceBreached:
+                break
             time.sleep(0.01)
             if self.simulator.get_cycle_number() != cycle_number and new_cycle == True:
                 new_cycle = False
@@ -46,7 +49,7 @@ class Vehicle:
                 self.simulator.start_car()
                 cycle_number = self.simulator.get_cycle_number()
                 new_cycle = True
-            elif y_car == 3950 and dist < 1900/2:
+            elif y_car == 3950 and dist < 500:
                 self.simulator.stop_car()
                 Datastore.update_all_guests("touring", "riding", "touring", "exploring")
                 time.sleep(20)
@@ -55,7 +58,7 @@ class Vehicle:
                 cycle_number = self.simulator.get_cycle_number()
                 new_cycle = True
 
-            elif x_car == 3100 and y_car>(2050+1900/2) and y_dino>(2050+1900/2):
+            elif x_car == 3100 and y_car>(2050+1900/2) and y_dino>(2050+3*1900/4):
                 self.simulator.stop_car()
                 Datastore.update_all_guests("touring", "riding", "touring", "exploring")
                 time.sleep(20)
@@ -64,7 +67,7 @@ class Vehicle:
                 new_cycle = True
 
                 cycle_number = self.simulator.get_cycle_number()
-            elif x_car == 3100 and y_car>2050:
+            elif x_car == 3100 and y_car>2050 and y_car<(2050+1900/2):
                 self.simulator.stop_car()
                 Datastore.update_all_guests("touring", "riding", "touring", "exploring")
                 time.sleep(20)

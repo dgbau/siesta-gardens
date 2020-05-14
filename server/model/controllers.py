@@ -18,6 +18,9 @@ people_thread.start()
 vehicle = Vehicle(simulator)
 vehicle_thread = threading.Thread(target=vehicle.autoStop)
 vehicle_thread.start()
+emergency_thread = threading.Thread(target=Emergency.detect_emergency)
+emergency_thread.start()
+
 
 def dino_loc():
     return [simulator.get_x_dino(), simulator.get_y_dino(), simulator.get_rad_dino()]
@@ -53,6 +56,3 @@ def world_state():
         "clients": client_list
     }
     }
-
-
-
