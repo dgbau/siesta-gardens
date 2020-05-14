@@ -12,7 +12,7 @@ function ClientList(props) {
           // console.log(idx);
           return (
             <li key={idx}>
-              <div className="name">{firstName} {lastName}</div>
+              <div className="name"> <em>{idx + 1}</em> {firstName} {lastName}</div>
               <div className={"subtitle " + location}>{location}</div>
             </li>
           );
