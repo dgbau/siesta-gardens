@@ -30,6 +30,11 @@ class Dashboard extends Component {
       trex.position.x = this.props.data.locationData.dinoLoc.x - OFFSET;
       trex.position.z = this.props.data.locationData.dinoLoc.y - OFFSET;
       trex.rotation.y = this.props.data.locationData.dinoLoc.heading;
+      if(!this.props.data.locationData.dinoLoc.dinosaurState){
+        trex.rotation.z = Math.PI/2;
+      }else{
+        trex.rotation.z = 0;
+      }
       //Car Movement
       car.position.x = this.props.data.locationData.carLoc.x - OFFSET;
       car.position.z = this.props.data.locationData.carLoc.y - OFFSET;
@@ -307,6 +312,7 @@ objLoader.load(
 function updateStuff() {
   if (this.props.data && trex) {
     console.log('trex', trex)
+    console.log("HERE");
     trex.position.x = this.props.data.locationData.dinoLoc.x - OFFSET;
     trex.position.z = this.props.data.locationData.dinoLoc.y - OFFSET;
     trex.rotation.y = this.props.data.locationData.dinoLoc.heading;

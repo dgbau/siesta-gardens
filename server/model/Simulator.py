@@ -122,7 +122,7 @@ class Simulator:
                     d_car = np.sqrt((y_car_dest- self._y_car)**2+(x_car_dest-self._x_car)**2)
                     x_car_step = self._car_step_size*((x_car_dest- self._x_car)/d_car)
                     y_car_step = self._car_step_size*((y_car_dest- self._y_car)/d_car)
-                    self._rad_car = math.atan2((x_dino_dest- self._x_car),(y_dino_dest-self._y_car)) + (np.pi/2)
+                    self._rad_car = math.atan2((x_car_dest- self._x_car),(y_car_dest-self._y_car)) + (np.pi/2)
 
                     self._reached_dest_car = False
                 if (np.sqrt((y_car_dest - self._y_car) ** 2 + (x_car_dest - self._x_car) ** 2) < np.sqrt((x_car_step) ** 2 + (y_car_step) ** 2)):
