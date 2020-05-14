@@ -4,6 +4,7 @@ from .Sensors import Sensors
 siren_towers = [0, 0, 0, 0, 0, 0, 0, 0]
 fence = Fence()
 sensors = Sensors()
+dinosaurEnable = True
 
 def sensor_triggered():
     return sensors.trip_triggered()
@@ -21,4 +22,4 @@ def activate_siren(id):
 
 
 def activate_disabler():
-    return 1
+    dinosaurEnable = False

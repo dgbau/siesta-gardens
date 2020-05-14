@@ -69,10 +69,12 @@ class Simulator:
         Datastore.storeGuest(first_name, last_name, age, address, em_cont)
 
     def make_people(self):
-        time.sleep(45)
-        people_count = 5
-        for i in range(people_count):
-            self.get_person()
+        while True:
+            people_count = 5
+            for i in range(people_count):
+                self.get_person()
+            time.sleep(20)
+
 
 
     def start(self):

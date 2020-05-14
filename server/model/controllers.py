@@ -32,6 +32,7 @@ def make_person(guest):
         "firstName": Datastore.dictionary[guest][0],
         "lastName": Datastore.dictionary[guest][1],
         "id": guest,
+        "status": Datastore.dictionary[guest][-2],
         "location": Datastore.dictionary[guest][-1]
     }
 
@@ -41,7 +42,8 @@ def world_state():
     trip_wire = Emergency.sensor_triggered()
     for guest in Datastore.dictionary:
         client_list.append(make_person(guest))
-    return jsonify({
+    return {
+    "dinosaurState": Emergency.dinosaurEnable,
     "perimeterData": {
         "sections": fence_state,
         "tripWireAlert": trip_wire # add method
@@ -50,7 +52,7 @@ def world_state():
     "clientData": {
         "clients": client_list
     }
-    })
+    }
 
 
 

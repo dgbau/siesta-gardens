@@ -45,7 +45,8 @@ def get_state():
         "dinoLoc": {
             "x": dinoloc[0],
             "y": dinoloc[1],
-            "heading": dinoloc[2]
+            "heading": dinoloc[2],
+            "dinosaurState": state["dinosaurState"]
         },
         "carLoc": {
             "x": carloc[0],
@@ -53,14 +54,9 @@ def get_state():
             "heading": carloc[2]
         },
     },
-    "perimeterData": {
-        "sections": [0,1,2,0],
-        "tripwireAlert": False
-    },
-    "clientData": {
-        "clients": helpers.create_fake_users(10)
-    }
-})
+    "perimeterData": state["perimeterData"],
+    "clientData": state["clientData"]
+    })
 
 
 @app.route('/chaos')
