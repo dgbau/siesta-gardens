@@ -15,13 +15,14 @@ class Camera extends Component {
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 50000 );
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth/2.5, window.innerHeight/2.5 );
+    renderer.setSize( 300, 245 );
 
-    window.addEventListener( 'resize', onWindowResize, false );
-    function onWindowResize(){
-        camera.aspect = window.innerWidth/window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth/2.5, window.innerHeight/2.5 );
-    }
+    // window.addEventListener( 'resize', onWindowResize, false );
+    // function onWindowResize(){
+    //     camera.aspect = window.innerWidth/window.innerHeight;
+    //     camera.updateProjectionMatrix();
+    //     renderer.setSize( window.innerWidth/2.5, window.innerHeight/2.5 );
+    // }
     var camLoc=this.props.location.carLoc;
 
     camera.position.x=camLoc.x;

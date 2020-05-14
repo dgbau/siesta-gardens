@@ -10,7 +10,7 @@ export default class MapC extends Component {
     };
   }
   fakeFence = [0, 0, 1, 2];
-  scale = 520;
+  scale = 530;
   ratio = 3000 / this.scale;
 
   componentDidMount() {}
