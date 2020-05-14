@@ -25,6 +25,14 @@ def detect_emergency():
             controllers.simulator.disable_dino()
             activate_disabler()
             dino_stopped = True
+            if x_dino<=2150:
+                fence.update_fence([0,0,0,2])
+            elif x_dino>=3050:
+                fence.update_fence([0,2,0,0])
+            elif y_dino<=2100:
+                fence.update_fence([2,0,0,0])
+            elif y_dino>=3900:
+                fence.update_fence([0,0,2,0])
         if car_stopped and dino_stopped:
             break
         if controllers.simulator.get_cycle_number() != cycle_number:
