@@ -23,11 +23,13 @@ class Vehicle:
         cycle_number = -1
         new_cycle = True
         while(True):
-            time.sleep(1)
+            time.sleep(0.01)
             if self.simulator.get_cycle_number() != cycle_number and new_cycle == True:
                 new_cycle = False
                 Datastore.update_all_guests("touring", "riding", "queued", "arrived")
+                self.simulator.stop_car()
                 time.sleep(10)
+                self.simulator.start_car()
                 Datastore.onboard_guests()
             x_car = self.simulator.get_x_car()
             y_car = self.simulator.get_y_car()
