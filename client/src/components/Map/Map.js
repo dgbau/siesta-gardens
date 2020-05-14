@@ -35,7 +35,7 @@ export default class MapC extends Component {
           y="0"
           width={this.scale}
           height={this.scale}
-          href="images/bare_map.jpg"
+          href="images/SGMap_road.jpg"
         />
 
         {/* TOP */}
