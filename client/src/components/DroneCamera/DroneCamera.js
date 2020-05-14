@@ -11,7 +11,7 @@ class Camera extends Component {
   componentDidMount() {
     var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 50000 );
     var renderer = new THREE.WebGLRenderer();
-    renderer.setSize( 300, 245  );
+    renderer.setSize( 420, 245  );
     // window.addEventListener( 'resize', onWindowResize, false );
     // function onWindowResize(){
     //     camera.aspect = window.innerWidth/window.innerHeight;

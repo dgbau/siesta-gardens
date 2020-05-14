@@ -350,14 +350,14 @@ class Dashboard extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-5">
+          <div className="col-4">
            
             <div className="widget">
             <h5>Park Map</h5>
               <Map data={this.props.data}></Map>
             </div>
           </div>
-          <div className="col-3">
+          <div className="col-4">
             <div className="widget">
               <div className="row">
                 <div className="col-12">
