@@ -7,7 +7,7 @@
     }
     
     ul {
-        height: 465px;
+        height: 520px;
     overflow: auto;
         min-height: 100px;
         padding: 10px;
@@ -32,6 +32,13 @@
             }
             &.ticketed {
                 color: green;
+            }
+        }
+        .name {
+            font-size: small;
+            font-weight: bold;
+            em {
+                color: #aaa;
             }
         }
     }

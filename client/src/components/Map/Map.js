@@ -10,7 +10,7 @@ export default class MapC extends Component {
     };
   }
   fakeFence = [0, 0, 1, 2];
-  scale = 520;
+  scale = 530;
   ratio = 3000 / this.scale;
 
   componentDidMount() {}
@@ -27,7 +27,7 @@ export default class MapC extends Component {
 
   render() {
     return this.props ? (
-      <svg height={this.scale} width={this.scale}>
+      <svg height={this.scale} width={this.scale/1.275}>
         <rect x="0" y="0" height={this.scale} width={this.scale} />
 
         <image

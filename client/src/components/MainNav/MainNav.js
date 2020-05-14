@@ -70,10 +70,11 @@ function MainNav(props) {
   }
   return (
     <nav className="navbar navbar-expand">
+      <div className="title">Siesta Gardens Control Panel </div>
       <a className="navbar-brand" href="/">
         <img src="/images/trex.png" alt="DP logo" width="60px" height="auto"/>
       </a>
-      <button className="btn-danger" onClick={makeChaos}>The Big Red Button </button>
+      <button className="btn-danger" onClick={makeChaos}>Don't Push This Button</button>
 
       <div className="navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">

@@ -3,8 +3,8 @@ from flask_socketio import SocketIO, disconnect, emit
 from flask_cors import CORS, cross_origin
 from server.app import helpers
 from server.model.Client import Client
-from server.model.controllers import dino_loc, car_loc, world_state
-
+from server.model.controllers import dino_loc, car_loc, world_state, simulator
+from server.model import Emergency
 c = Client("david", "bau", 1)
 print(c)
 
@@ -63,6 +63,8 @@ def get_state():
 @cross_origin()
 def go_dumb():
     print("BERZERKER!!!!!!")
+    simulator.make_dino_crazy()
+    Emergency.fence_breach()
     # import some method and call it here to break the fence
     return jsonify({
         "message": "GO DUMB."
