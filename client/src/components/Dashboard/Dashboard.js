@@ -353,7 +353,7 @@ class Dashboard extends Component {
           <div className="col-5">
            
             <div className="widget">
-            <h4>Park Map</h4>
+            <h5>Park Map</h5>
               <Map data={this.props.data}></Map>
             </div>
           </div>
@@ -361,7 +361,7 @@ class Dashboard extends Component {
             <div className="widget">
               <div className="row">
                 <div className="col-12">
-                  <h4>Drone Cam</h4>
+                  <h5>Drone Cam</h5>
                   <div id="dronecamera">
                     <DroneCamera
                       camID="3"
@@ -374,7 +374,7 @@ class Dashboard extends Component {
               </div>
               <div className="row">
                 <div className="col-12">
-                  <h4>Vehicle Cam</h4>
+                  <h5>Vehicle Cam</h5>
                   <Camera
                     camID="0"
                     scene={this.sceney}

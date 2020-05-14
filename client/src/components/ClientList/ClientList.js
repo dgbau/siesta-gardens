@@ -6,7 +6,7 @@ import "./ClientList.scss";
 function ClientList(props) {
   return (
     <div className="clientlist">
-      <h4>{props.title}</h4>
+      <h5>{props.title}</h5>
       <ul>
         {props.data.filter(x => x.status === props.title.toLowerCase()).map(({ firstName, lastName, location }, idx) => {
           // console.log(idx);
