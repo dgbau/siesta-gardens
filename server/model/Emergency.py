@@ -20,6 +20,6 @@ def activate_siren(id):
     else:
         return 0
 
-
 def activate_disabler():
+    global dinosaurEnable
     dinosaurEnable = False
